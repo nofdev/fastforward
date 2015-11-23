@@ -1,4 +1,4 @@
-package provision
+package provisioning
 
 import "github.com/wingedpig/loom"
 
