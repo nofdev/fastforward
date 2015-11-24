@@ -38,7 +38,7 @@ func (c *Conf) Execute(d Cmd) (string, error) {
 	}
 	if d.UseSudo {
 		return c.Sudo(d.CmdLine)
-	} else {
-		return c.Run(d.CmdLine)
 	}
+	return c.Run(d.CmdLine)
 }
+
