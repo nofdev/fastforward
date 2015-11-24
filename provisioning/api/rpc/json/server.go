@@ -23,7 +23,7 @@ type Args struct {
 // Result contains the API call results.
 type Result interface {}
 
-// Exec takes a command to be executed on the remote server.
+// Exec takes a command to be executed from API on the remote server.
 func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
 	c, err := provisioning.MakeConfig(args.User, args.Host, args.DisplayOutput, args.AbortOnError); if err != nil {
 		log.Printf("Make config error, %s", err)
