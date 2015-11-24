@@ -2,15 +2,15 @@ package main
 
 import (
     "github.com/gorilla/mux"
-    "github.com/gorilla/rpc"
-    "github.com/gorilla/rpc/json"
+    "github.com/gorilla/rpc/v2"
+    "github.com/gorilla/rpc/v2/json"
     "log"
     "net/http"
     "github.com/nofdev/fastforward/provisioning"
 )
 
-// Config contains the configuration of ssh.
-type Config struct {
+// Provisioning contains the configuration of ssh.
+type Provisioning struct {
     provisioning.Conf
 }
 
@@ -24,7 +24,7 @@ type Args struct {
 type Result interface {}
 
 // Exec takes a command to be executed on the remote server.
-func (t *Config) Exec(r *http.Request, args *Args, result *Result) error {
+func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
 	c, err := provisioning.MakeConfig(args.User, args.Host, args.DisplayOutput, args.AbortOnError); if err != nil {
 		log.Printf("Make config error, %s", err)
 	}
@@ -40,9 +40,8 @@ func (t *Config) Exec(r *http.Request, args *Args, result *Result) error {
 func main() {
     s := rpc.NewServer()
     s.RegisterCodec(json.NewCodec(), "application/json")
-    s.RegisterCodec(json.NewCodec(), "application/json;charset=UTF-8")
-    config := new(Config)
-    s.RegisterService(config, "")
+    provisioning := new(Provisioning)
+    s.RegisterService(provisioning, "")
     r := mux.NewRouter()
     r.Handle("/v1", s)
     http.ListenAndServe(":7000", r)

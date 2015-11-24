@@ -9,7 +9,7 @@ FastForward is a DevOps automate platform.
 Example Request:
 
 	./jsonrpctest.py http://YOUR_FF_SERVER:7000/v1 \
-	Config.Exec \
+	Provisioning.Exec \
 	"{'User': 'ubuntu', \
 	'Host': 'YOUR_REMOTE_SERVER', \
 	'DisplayOutput': true, \
