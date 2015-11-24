@@ -37,8 +37,7 @@ func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
     
 	cmd := provisioning.Cmd{AptCache: args.AptCache, UseSudo: args.UseSudo, CmdLine: args.CmdLine}
 
-	var i provisioning.Provisioning
-	i = c
+	i := provisioning.Provisioning(c)
 	*result, _ = i.Execute(cmd)
     return nil
 }
@@ -52,7 +51,9 @@ func (p *Provisioning) GetFile(r *http.Request, args *Args, result *Result) erro
     if args.RemoteFile== "" || args.LocalFile == "" {
         *result = "RemoteFile or LocalFile are needed."
     }
-    *result = c.GetFile(args.RemoteFile, args.LocalFile)
+
+    i := provisioning.Provisioning(c)
+    *result = i.GetFile(args.RemoteFile, args.LocalFile)
     return nil
 }
 
