@@ -34,12 +34,11 @@ type Cmd struct {
 // Execute the command
 func (c *Conf) Execute(d Cmd) (string, error) {
 	if d.AptCache {
-		c.Sudo("apt-get update")
+		return c.Sudo("apt-get update")
 	}
 	if d.UseSudo {
-		c.Sudo(d.CmdLine)
+		return c.Sudo(d.CmdLine)
 	} else {
-		c.Run(d.CmdLine)
+		return c.Run(d.CmdLine)
 	}
-	return "", nil
 }

@@ -29,7 +29,7 @@ func (this *Config) Exec(r *http.Request, args *Args, result *Result) error {
 
 	var i provisioning.Provisioning
 	i = c
-	i.Execute(cmd)
+	*result, _ = i.Execute(cmd)
     return nil
 }
 
