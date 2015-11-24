@@ -9,22 +9,26 @@ import (
     "github.com/nofdev/fastforward/provisioning"
 )
 
+// Config contains the configuration of ssh.
 type Config struct {
     provisioning.Conf
 }
 
+// Args contains the method arguments for ssh login.
 type Args struct {
     provisioning.Conf
     provisioning.Cmd
 }
 
+// Result contains the API call results.
 type Result interface {}
 
-func (this *Config) Exec(r *http.Request, args *Args, result *Result) error {
-
+// Exec takes a command to be executed on the remote server.
+func (t *Config) Exec(r *http.Request, args *Args, result *Result) error {
 	c, err := provisioning.MakeConfig(args.User, args.Host, args.DisplayOutput, args.AbortOnError); if err != nil {
 		log.Printf("Make config error, %s", err)
 	}
+    
 	cmd := provisioning.Cmd{AptCache: args.AptCache, UseSudo: args.UseSudo, CmdLine: args.CmdLine}
 
 	var i provisioning.Provisioning
