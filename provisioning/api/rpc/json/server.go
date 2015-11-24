@@ -14,10 +14,16 @@ type Provisioning struct {
     provisioning.Conf
 }
 
+// File contains filename for GetFile and PutFile.
+type File struct {
+    RemoteFile string
+    LocalFile string
+}
 // Args contains the method arguments for ssh login.
 type Args struct {
     provisioning.Conf
     provisioning.Cmd
+    File
 }
 
 // Result contains the API call results.
@@ -34,6 +40,19 @@ func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
 	var i provisioning.Provisioning
 	i = c
 	*result, _ = i.Execute(cmd)
+    return nil
+}
+
+// GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported. 
+func (p *Provisioning) GetFile(r *http.Request, args *Args, result *Result) error {
+    c, err := provisioning.MakeConfig(args.User, args.Host, args.DisplayOutput, args.AbortOnError); if err != nil {
+        log.Printf("Make config error, %s", err)
+    }
+    
+    if args.RemoteFile== "" || args.LocalFile == "" {
+        *result = "RemoteFile or LocalFile are needed."
+    }
+    *result = c.GetFile(args.RemoteFile, args.LocalFile)
     return nil
 }
 

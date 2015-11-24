@@ -42,3 +42,7 @@ func (c *Conf) Execute(d Cmd) (string, error) {
 	return c.Run(d.CmdLine)
 }
 
+// GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported. 
+func (c *Conf) GetFile(remotefile string, localfile string) error {
+	return c.Get(remotefile, localfile)
+}
