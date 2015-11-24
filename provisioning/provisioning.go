@@ -5,6 +5,7 @@ import "github.com/wingedpig/loom"
 // Provisioning contains the provisioning method only.
 type Provisioning interface {
 	Execute(c Cmd) (string, error)
+	GetFile(remotefile string, localfile string) error
 }
 
 // Conf contains ssh and other configuration data needed for all the public functions in provisioning stage.
@@ -32,14 +33,16 @@ type Cmd struct {
 }
 
 // Execute takes a command and runs it on the remote host over ssh.
-func (c *Conf) Execute(d Cmd) (string, error) {
+func (c *Conf) Execute(d Cmd) (result string, err error) {
 	if d.AptCache {
-		return c.Sudo("apt-get update")
+		c.Sudo("apt-get update")
 	}
 	if d.UseSudo {
-		return c.Sudo(d.CmdLine)
+		result, err = c.Sudo(d.CmdLine)
+	} else {
+		result, err = c.Run(d.CmdLine)
 	}
-	return c.Run(d.CmdLine)
+	return
 }
 
 // GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported. 
