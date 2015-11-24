@@ -1,58 +1,45 @@
 package main
 
 import (
-	"fmt"
-	"net/rpc"
-	"net/rpc/jsonrpc"
-	"os"
-	"net"
-	
-	"github.com/nofdev/fastforward/provisioning"
+    "github.com/gorilla/mux"
+    "github.com/gorilla/rpc"
+    "github.com/gorilla/rpc/json"
+    "log"
+    "net/http"
+    "github.com/nofdev/fastforward/provisioning"
 )
 
-// Args struct will be the json args
-type Args struct {
-	User string
-	Host string
-	Output bool
-	Abort bool
-	provisioning.Cmd
+type Config struct {
+    provisioning.Conf
 }
 
-type Api int
-var i provisioning.Provisioning
+type Args struct {
+    provisioning.Conf
+    provisioning.Cmd
+}
 
-// Execute command from api
-func (a *Api) Exec(args *Args, reply *string) error {
-	c, err := provisioning.MakeConfig(args.User, args.Host, args.Output, args.Abort)
-	checkError(err)
+type Result interface {}
 
+func (this *Config) Exec(r *http.Request, args *Args, result *Result) error {
+
+	c, err := provisioning.MakeConfig(args.User, args.Host, args.DisplayOutput, args.AbortOnError); if err != nil {
+		log.Printf("Make config error, %s", err)
+	}
+	cmd := provisioning.Cmd{AptCache: args.AptCache, UseSudo: args.UseSudo, CmdLine: args.CmdLine}
+
+	var i provisioning.Provisioning
 	i = c
-	i.Execute(args.Cmd)
-	return nil
+	i.Execute(cmd)
+    return nil
 }
 
 func main() {
-	provision := new(Api)
-	rpc.Register(provision)
-
-	tcpAddr, err := net.ResolveTCPAddr("tcp", ":8080")
-	checkError(err)
-	listener, err := net.ListenTCP("tcp", tcpAddr)
-	checkError(err)
-
-	for {
-		conn, err := listener.Accept()
-		if err != nil {
-			continue
-		}
-		jsonrpc.ServeConn(conn)
-	}
-}
-
-func checkError(err error) {
-	if err != nil {
-		fmt.Println("Fatal error ", err.Error())
-		os.Exit(1)
-	}
+    s := rpc.NewServer()
+    s.RegisterCodec(json.NewCodec(), "application/json")
+    s.RegisterCodec(json.NewCodec(), "application/json;charset=UTF-8")
+    config := new(Config)
+    s.RegisterService(config, "")
+    r := mux.NewRouter()
+    r.Handle("/v1", s)
+    http.ListenAndServe(":7000", r)
 }
