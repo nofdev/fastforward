@@ -48,6 +48,14 @@ func (p *Provisioning) GetFile(r *http.Request, args *Args, result *Result) erro
     return nil
 }
 
+// Self executes a command on the FastForward API server.
+func (p *Provisioning) Self(r *http.Request, args *Args, result *Result)  error {
+    i := provisioning.Provisioning(args)
+    *result, _ = i.Self(args.Cmd)
+    log.Printf("Request: %s, Method: Self, Args: %s, Result: %s", *r, *args, *result)
+    return nil
+}
+
 func main() {
     s := rpc.NewServer()
     log.Printf("API Server started")

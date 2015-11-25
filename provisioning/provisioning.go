@@ -6,6 +6,7 @@ import "github.com/wingedpig/loom"
 type Provisioning interface {
 	Execute(c Cmd) (string, error)
 	GetFile(remotefile string, localfile string) error
+	Self(d Cmd) (result string, err error)
 }
 
 // Conf contains ssh and other configuration data needed for all the public functions in provisioning stage.
@@ -48,4 +49,10 @@ func (c *Conf) Execute(d Cmd) (result string, err error) {
 // GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported. 
 func (c *Conf) GetFile(remotefile string, localfile string) error {
 	return c.Get(remotefile, localfile)
+}
+
+// Self executes a command on the FastForward API server.
+func (c *Conf) Self(d Cmd) (result string, err error) {
+	result, err = c.Local(d.CmdLine)
+	return
 }
