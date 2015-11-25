@@ -48,6 +48,22 @@ func (p *Provisioning) GetFile(r *http.Request, args *Args, result *Result) erro
     return nil
 }
 
+// checkFile ensure the args about PutFile and GetFile return the error to API caller.
+func checkFile(r *http.Request, args *Args, result *Result){
+    if args.RemoteFile == "" || args.LocalFile == "" {
+        *result = "RemoteFile or LocalFile are needed."
+        log.Printf("Request: %s, Error: %s", *r, *result)
+    }      
+}
+
+// PutFile copies one or more local files to the remote host, using scp. localfiles can contain wildcards, and remotefile can be either a directory or a file. 
+func (p *Provisioning) PutFile(r *http.Request, args *Args, result *Result) error {
+    checkFile(r, args, result)
+    i := provisioning.Provisioning(args)
+    *result = i.PutFile(args.LocalFile, args.RemoteFile)
+    return nil
+}
+
 // Self executes a command on the FastForward API server.
 func (p *Provisioning) Self(r *http.Request, args *Args, result *Result)  error {
     i := provisioning.Provisioning(args)

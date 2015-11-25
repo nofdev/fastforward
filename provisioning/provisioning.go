@@ -7,6 +7,7 @@ type Provisioning interface {
 	Execute(c Cmd) (string, error)
 	GetFile(remotefile string, localfile string) error
 	Self(d Cmd) (result string, err error)
+	PutFile(localfiles string, remotefile string) error
 }
 
 // Conf contains ssh and other configuration data needed for all the public functions in provisioning stage.
@@ -49,6 +50,11 @@ func (c *Conf) Execute(d Cmd) (result string, err error) {
 // GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported. 
 func (c *Conf) GetFile(remotefile string, localfile string) error {
 	return c.Get(remotefile, localfile)
+}
+
+// PutFile copies one or more local files to the remote host, using scp. localfiles can contain wildcards, and remotefile can be either a directory or a file. 
+func (c *Conf) PutFile(localfiles string, remotefile string) error {
+	return c.Put(localfiles, remotefile)
 }
 
 // Self executes a command on the FastForward API server.
