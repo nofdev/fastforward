@@ -36,6 +36,8 @@ func checkFile(r *http.Request, args *Args, result *Result){
 }
 
 // Exec takes a command to be executed from API on the remote server.
+// Args: {'User': 'USERNAME', 'Host': 'REMOTESERVER', 'CmdLine': 'CMD'}
+// Optional Args: {'AptCache': true, 'UseSudo': true, 'Password': 'PASS', 'KeyFiles': 'IDRSA', 'DisplayOutput': true, 'AbortOnError': true}
 func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
 	cmd := provisioning.Cmd{AptCache: args.AptCache, UseSudo: args.UseSudo, CmdLine: args.CmdLine}
 	i := provisioning.Provisioning(args)
@@ -45,6 +47,8 @@ func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
 }
 
 // GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported. 
+// Args: {'User': 'USERNAME', 'Host': 'REMOTESERVER', 'RemoteFile': 'FILENAME', 'LocalFile': 'FILENAME'}
+// Optional Args: {'Password': 'PASS', 'KeyFiles': 'IDRSA', 'DisplayOutput': true, 'AbortOnError': true}
 func (p *Provisioning) GetFile(r *http.Request, args *Args, result *Result) error {
     checkFile(r, args, result)
     i := provisioning.Provisioning(args)
@@ -54,6 +58,8 @@ func (p *Provisioning) GetFile(r *http.Request, args *Args, result *Result) erro
 }
 
 // PutFile copies one or more local files to the remote host, using scp. localfiles can contain wildcards, and remotefile can be either a directory or a file. 
+// Args: {'User': 'USERNAME', 'Host': 'REMOTESERVER', 'LocalFile': 'FILENAME', 'RemoteFile': 'FILENAME'}
+// Optional Args: {'Password': 'PASS', 'KeyFiles': 'IDRSA', 'DisplayOutput': true, 'AbortOnError': true}
 func (p *Provisioning) PutFile(r *http.Request, args *Args, result *Result) error {
     checkFile(r, args, result)
     i := provisioning.Provisioning(args)
@@ -62,6 +68,7 @@ func (p *Provisioning) PutFile(r *http.Request, args *Args, result *Result) erro
 }
 
 // Self executes a command on the FastForward API server.
+// Args: {'CmdLine': 'CMD'}
 func (p *Provisioning) Self(r *http.Request, args *Args, result *Result)  error {
     i := provisioning.Provisioning(args)
     *result, _ = i.Self(args.Cmd)
