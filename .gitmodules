@@ -1,4 +1,4 @@
 [submodule "playback"]
-    path = base/playback
-    url = https://github.com/jiasir/playback.git
+	path = base/playback
+	url = https://github.com/jiasir/playback.git
 	branch = master
