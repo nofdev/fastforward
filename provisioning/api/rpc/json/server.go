@@ -64,6 +64,7 @@ func (p *Provisioning) PutFile(r *http.Request, args *Args, result *Result) erro
     checkFile(r, args, result)
     i := provisioning.Provisioning(args)
     *result = i.PutFile(args.LocalFile, args.RemoteFile)
+    log.Printf("Request: %s, Method: GetFile, Args: %s, Result: %s", *r, *args, *result)
     return nil
 }
 
