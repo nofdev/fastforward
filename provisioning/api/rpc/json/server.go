@@ -16,6 +16,7 @@ type Provisioning struct {}
 type File struct {
     RemoteFile string
     LocalFile string
+    Data string
 }
 // Args contains the method arguments for ssh login.
 type Args struct {
@@ -64,7 +65,17 @@ func (p *Provisioning) PutFile(r *http.Request, args *Args, result *Result) erro
     checkFile(r, args, result)
     i := provisioning.Provisioning(args)
     *result = i.PutFile(args.LocalFile, args.RemoteFile)
-    log.Printf("Request: %s, Method: GetFile, Args: %s, Result: %s", *r, *args, *result)
+    log.Printf("Request: %s, Method: PutFile, Args: %s, Result: %s", *r, *args, *result)
+    return nil
+}
+
+// PutString generates a new file on the remote host containing data. The file is created with mode 0644.
+// Args: {'User': 'USERNAME', 'Host': 'REMOTESERVER', 'Data': 'STRING', 'RemoteFile': 'FILENAME'}
+// Optional Args: {'Password': 'PASS', 'KeyFiles': 'IDRSA', 'DisplayOutput': true, 'AbortOnError': true}
+func (p *Provisioning) PutString(r *http.Request, args *Args, result *Result) error {
+    i := provisioning.Provisioning(args)
+    *result = i.PutString(args.Data, args.RemoteFile)
+    log.Printf("Request: %s, Method: PutString, Args: %s, Result: %s", *r, *args, *result)
     return nil
 }
 
