@@ -27,6 +27,14 @@ type Args struct {
 // Result contains the API call results.
 type Result interface {}
 
+// checkFile ensure the args about PutFile and GetFile return the error to API caller.
+func checkFile(r *http.Request, args *Args, result *Result){
+    if args.RemoteFile == "" || args.LocalFile == "" {
+        *result = "RemoteFile or LocalFile are needed."
+        log.Printf("Request: %s, Error: %s", *r, *result)
+    }      
+}
+
 // Exec takes a command to be executed from API on the remote server.
 func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
 	cmd := provisioning.Cmd{AptCache: args.AptCache, UseSudo: args.UseSudo, CmdLine: args.CmdLine}
@@ -38,22 +46,11 @@ func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
 
 // GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported. 
 func (p *Provisioning) GetFile(r *http.Request, args *Args, result *Result) error {
-    if args.RemoteFile == "" || args.LocalFile == "" {
-        *result = "RemoteFile or LocalFile are needed."
-        log.Printf("Request: %s, Error: %s", *r, *result)
-    }
+    checkFile(r, args, result)
     i := provisioning.Provisioning(args)
     *result = i.GetFile(args.RemoteFile, args.LocalFile)
     log.Printf("Request: %s, Method: GetFile, Args: %s, Result: %s", *r, *args, *result)
     return nil
-}
-
-// checkFile ensure the args about PutFile and GetFile return the error to API caller.
-func checkFile(r *http.Request, args *Args, result *Result){
-    if args.RemoteFile == "" || args.LocalFile == "" {
-        *result = "RemoteFile or LocalFile are needed."
-        log.Printf("Request: %s, Error: %s", *r, *result)
-    }      
 }
 
 // PutFile copies one or more local files to the remote host, using scp. localfiles can contain wildcards, and remotefile can be either a directory or a file. 
