@@ -12,7 +12,7 @@ type Provisioning interface {
 }
 
 // Conf contains ssh and other configuration data needed for all the public functions in provisioning stage.
-type Conf struct  {
+type Conf struct {
 	loom.Config
 }
 
@@ -32,7 +32,6 @@ type Cmd struct {
 
 	// UseSudo is the sudo privilege.
 	UseSudo bool
-
 }
 
 // Execute takes a command and runs it on the remote host over ssh.
@@ -48,12 +47,12 @@ func (c *Conf) Execute(d Cmd) (result string, err error) {
 	return
 }
 
-// GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported. 
+// GetFile copies the file from the remote host to the local FastForward server, using scp. Wildcards are not currently supported.
 func (c *Conf) GetFile(remotefile string, localfile string) error {
 	return c.Get(remotefile, localfile)
 }
 
-// PutFile copies one or more local files to the remote host, using scp. localfiles can contain wildcards, and remotefile can be either a directory or a file. 
+// PutFile copies one or more local files to the remote host, using scp. localfiles can contain wildcards, and remotefile can be either a directory or a file.
 func (c *Conf) PutFile(localfiles string, remotefile string) error {
 	return c.Put(localfiles, remotefile)
 }
@@ -64,7 +63,7 @@ func (c *Conf) Self(d Cmd) (result string, err error) {
 	return
 }
 
-// PutString generates a new file on the remote host containing data. The file is created with mode 0644. 
+// PutString generates a new file on the remote host containing data. The file is created with mode 0644.
 func (c *Conf) PutString(data string, remotefile string) error {
 	return c.Config.PutString(data, remotefile)
 }
