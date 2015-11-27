@@ -75,12 +75,65 @@ type ExtraVars struct {
 	// Vars: node_name
 	NodeName string
 	// Vars: storage_ip
-	StorageIp string
+	StorageIP string
 	// Vars: storage_mask
 	StorageMask string
 	// Vars: storage_network
 	StorageNetwork string
-	// vars: storage_broadcast
+	// Vars: storage_broadcast
 	StorageBroadcast string
-	
+	// Command line playback-nic
+	PlaybackNic PlaybackNic
+	// Vars: host
+	HostName string
+	// Vars: router_id
+	RouterID string
+	// Vars: state
+	State string
+	// Vars: priority
+	Priority int
+	// Python scripts *.py
+	PythonScript string
+	// Vars: my_ip
+	MyIP string
+	// Vars: my_storage_ip
+	MyStorageIP string
+	// Vars: swift_storage_storage_ip
+	SwiftStorageStorageIP string
+	// Vars: device_name
+	DeviceName string
+	// Vars: device_weight
+	DeviceWeight int
+	// Vars: hosts
+	Hosts string
+	// Vars: client
+	ClientName string
+	// Vars: disk
+	Disk string
+	// Vars: partition
+	Partition string
+}
+
+// PlaybackNic using playback-nic command instaed of openstack_interface.yml
+type PlaybackNic struct {
+	// Args: purge
+	Purge bool
+	// Args: public
+	Public bool
+	// Args: private
+	Private bool
+	// Args: host
+	Host string
+	// Args: user
+	User string
+	// Args: address
+	Address string
+	// Args: nic
+	NIC string
+	// Args: netmask
+	Netmask string
+	// Args: gateway
+	Gateway string
+	// Args: dns-nameservers
+	DNS string
 }
