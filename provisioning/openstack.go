@@ -67,3 +67,20 @@ type OpenStack interface {
 	// Convert kvm to Docker(OPTIONAL)
 	KvmToDocker()
 }
+
+// ExtraVars takes playback command line arguments.
+type ExtraVars struct {
+	// Ansible Playbook *.yml
+	Playbook string
+	// Vars: node_name
+	NodeName string
+	// Vars: storage_ip
+	StorageIp string
+	// Vars: storage_mask
+	StorageMask string
+	// Vars: storage_network
+	StorageNetwork string
+	// vars: storage_broadcast
+	StorageBroadcast string
+	
+}
