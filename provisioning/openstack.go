@@ -45,7 +45,7 @@ type OpenStack interface {
 	// Create the cinder ceph user and pool name.
 	CephUserPool()
 	// Deploy cinder-api.
-	CinderApi()
+	CinderAPI()
 	// Deploy cinder-volume on controller node(Ceph backend).
 	CinderVolume()
 	// Restart volume service dependency to take effect for ceph backend.
@@ -136,4 +136,164 @@ type PlaybackNic struct {
 	Gateway string
 	// Args: dns-nameservers
 	DNS string
+}
+
+// ConfigureStorageNetwork takes playback-nic to set up the storage network.
+func (e ExtraVars) ConfigureStorageNetwork() error {
+	return nil
+}
+
+// LoadBalancer deploy a HAProxy and Keepalived for OpenStack HA.
+func (e ExtraVars) LoadBalancer() error {
+	return nil
+}
+
+// PrepareBasicEnvirionment prepares OpenStack basic environment.
+func (e ExtraVars) PrepareBasicEnvirionment() error {
+	return nil
+}
+
+// MariadbCluster deploy MariaDB Cluster.
+func (e ExtraVars) MariadbCluster() error {
+	return nil
+}
+
+// RabbtmqCluster deploy RabbitMQ Cluster.
+func (e ExtraVars) RabbtmqCluster() error {
+	return nil
+}
+
+// Keystone method deploy the Keystone components.
+func (e ExtraVars) Keystone() error {
+	return nil
+}
+
+// FormatDiskForSwift formats devices for Swift Storage (sdb1 and sdc1).
+func (e ExtraVars) FormatDiskForSwift() error {
+	return nil
+}
+
+// SwiftStorage deploy Swift storage.
+func (e ExtraVars) SwiftStorage() error {
+	return nil
+}
+
+// SwiftProxy deploy Swift proxy HA.
+func (e ExtraVars) SwiftProxy() error {
+	return nil
+}
+
+// InitSwiftRings initial Swift rings.
+func (e ExtraVars) InitSwiftRings() error {
+	return nil
+}
+
+// DistSwiftRingConf destribute Swift ring configuration files.
+func (e ExtraVars) DistSwiftRingConf() error {
+	return nil
+}
+
+// FinalizeSwift finalize Swift installation.
+func (e ExtraVars) FinalizeSwift() error {
+	return nil
+}
+
+// Glance deploy Glance HA.
+func (e ExtraVars) Glance() error {
+	return nil
+}
+
+// CephAdmin deploy the Ceph admin node.
+func (e ExtraVars) CephAdmin() error {
+	return nil
+}
+
+// CephInitMon deploy the Ceph initial monitor.
+func (e ExtraVars) CephInitMon() error {
+	return nil
+}
+
+// CephClient deploy the Ceph client.
+func (e ExtraVars) CephClient() error {
+	return nil
+}
+
+// GetCephKey add Ceph initial monitors and gather the keys.
+func (e ExtraVars) GetCephKey() error {
+	return nil
+}
+
+// AddOSD add the Ceph OSDs.
+func (e ExtraVars) AddOSD() error {
+	return nil
+}
+
+// AddCephMon add the Ceph monitors.
+func (e ExtraVars) AddCephMon() error {
+	return nil
+}
+
+// SyncCephKey copy the Ceph keys to nodes.
+func (e ExtraVars) SyncCephKey() error {
+	return nil
+}
+
+// CephUserPool creates the cinder ceph user and pool name.
+func (e ExtraVars) CephUserPool() error {
+	return nil
+}
+
+// CinderAPI deploy cinder-api.
+func (e ExtraVars) CinderAPI() error {
+	return nil
+}
+
+// CinderVolume deploy cinder-volume on controller node(ceph backend).
+func (e ExtraVars) CinderVolume() error {
+	return nil
+}
+
+// RestartCephDeps restart volume service dependency to take effect for ceph backend.
+func (e ExtraVars) RestartCephDeps() error {
+	return nil
+}
+
+// NovaController deploy Nova controller.
+func (e ExtraVars) NovaController() error {
+	return nil
+}
+
+// Dashboard deploy Horizon.
+func (e ExtraVars) Dashboard() error {
+	return nil
+}
+
+// NovaComputes deploy Nova computes.
+func (e ExtraVars) NovaComputes() error {
+	return nil
+}
+
+// NovaNetwork deploy legacy networking nova-network(FLATdhcp Only).
+func (e ExtraVars) NovaNetwork() error {
+	return nil
+}
+
+// Heat deploy orchestration components(heat).
+func (e ExtraVars) Heat() error {
+	return nil
+}
+
+// AutoStart fix the service can not auto start when sys booting.
+func (e ExtraVars) AutoStart() error {
+	return nil
+}
+
+// Designate deploy DNS as a Service.
+func (e ExtraVars) Designate() error {
+	return nil
+}
+
+// KvmToDocker converts kvm to docker(OPTIONAL).
+func (e ExtraVars) KvmToDocker() error {
+	return nil
 }
