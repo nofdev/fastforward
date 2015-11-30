@@ -313,7 +313,7 @@ func (vars ExtraVars) CephInitMon() error {
 }
 
 // CephClient deploy the Ceph client.
-// The method takes the following commands:
+// The method takes the following commands of playback:
 //  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=controller01" -vvvv'
 //  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=controller02" -vvvv'
 //  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=compute01" -vvvv'
@@ -328,7 +328,7 @@ func (vars ExtraVars) CephClient() error {
 }
 
 // GetCephKey add Ceph initial monitors and gather the keys.
-// The method takes the following command:
+// The method takes the following command of playback:
 //  playback --ansible 'openstack_ceph_gather_keys.yml -vvvv'
 func (vars ExtraVars) GetCephKey() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_gather_keys.yml", "-vvvv")
@@ -337,7 +337,7 @@ func (vars ExtraVars) GetCephKey() error {
 
 // AddOSD add the Ceph OSDs.
 // Only sopport sdb and sdc.
-// The method takes the following commands:
+// The method takes the following commands of playback:
 //  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute01 disk=sdb partition=sdb1" -vvvv'
 //  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute01 disk=sdc partition=sdc1" -vvvv'
 //  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute02 disk=sdb partition=sdb1" -vvvv'
