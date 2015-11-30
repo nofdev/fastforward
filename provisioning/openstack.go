@@ -175,6 +175,7 @@ func (vars ExtraVars) LBOptimize() error {
 
 // PrepareBasicEnvirionment prepares OpenStack basic environment.
 func (vars ExtraVars) PrepareBasicEnvirionment() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_basic_environment.yml", "-vvvv")
 	return nil
 }
 
