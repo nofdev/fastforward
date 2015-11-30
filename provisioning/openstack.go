@@ -162,7 +162,7 @@ func (vars ExtraVars) ConfigureStorageNetwork() error {
 }
 
 // LoadBalancer deploy a HAProxy and Keepalived for OpenStack HA.
-// The method takes the following command:
+// The method takes the following command of Playback:
 //  playback --ansible 'openstack_haproxy.yml --extra-vars "host=lb01 router_id=lb01 state=MASTER priority=150" -vvvv'
 //  playback --ansible 'openstack_haproxy.yml --extra-vars "host=lb02 router_id=lb02 state=SLAVE priority=100" -vvvv'
 func (vars ExtraVars) LoadBalancer() error {
@@ -171,7 +171,7 @@ func (vars ExtraVars) LoadBalancer() error {
 }
 
 // LBOptimize optimizing load balancer.
-// the method takes the floowing command:
+// the method takes the floowing command of Playback:
 //  python patch-limits.py
 func (vars ExtraVars) LBOptimize() error {
 	command.ExecuteWithOutput("python patch-limits.py")
@@ -179,7 +179,7 @@ func (vars ExtraVars) LBOptimize() error {
 }
 
 // PrepareBasicEnvirionment prepares OpenStack basic environment.
-// The method takes the following command:
+// The method takes the following command of Playback:
 //  playback --ansible 'openstack_basic_environment.yml -vvvv'
 func (vars ExtraVars) PrepareBasicEnvirionment() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_basic_environment.yml", "-vvvv")
@@ -187,7 +187,7 @@ func (vars ExtraVars) PrepareBasicEnvirionment() error {
 }
 
 // MariadbCluster deploy MariaDB Cluster.
-// The method takes the following commands:
+// The method takes the following commands of Playback:
 //  playback --ansible 'openstack_mariadb.yml --extra-vars "host=controller01 my_ip=192.169.151.19" -vvvv'
 //  playback --ansible 'openstack_mariadb.yml --extra-vars "host=controller02 my_ip=192.169.151.17" -vvvv'
 //  python keepalived.py
@@ -200,7 +200,7 @@ func (vars ExtraVars) MariadbCluster() error {
 }
 
 // RabbtmqCluster deploy RabbitMQ Cluster.
-// The method takes the following commands:
+// The method takes the following commands of Playback:
 //  playback --ansible 'openstack_rabbitmq.yml --extra-vars "host=controller01" -vvvv'
 //  playback --ansible 'openstack_rabbitmq.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) RabbtmqCluster() error {
@@ -209,7 +209,7 @@ func (vars ExtraVars) RabbtmqCluster() error {
 }
 
 // Keystone method deploy the Keystone components.
-// The method takes the following commands:
+// The method takes the following commands of Playback:
 //  playback --ansible 'openstack_keystone.yml --extra-vars "host=controller01" -vvvv'
 //  playback --ansible 'openstack_keystone.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) Keystone() error {
@@ -220,7 +220,7 @@ func (vars ExtraVars) Keystone() error {
 // FormatDiskForSwift formats devices for Swift Storage (sdb1 and sdc1).
 // Each of the swift nodes, /dev/sdb1 and /dev/sdc1, must contain a suitable partition table with one partition occupying the entire device.
 // Although the Object Storage service supports any file system with extended attributes (xattr), testing and benchmarking indicate the best performance and reliability on XFS.
-// The method takes the folowing commands:
+// The method takes the folowing commands of Playback:
 //  playback --ansible 'openstack_storage_partitions.yml --extra-vars "host=compute05" -vvvv'
 //  playback --ansible 'openstack_storage_partitions.yml --extra-vars "host=compute06" -vvvv'
 func (vars ExtraVars) FormatDiskForSwift() error {
@@ -229,7 +229,7 @@ func (vars ExtraVars) FormatDiskForSwift() error {
 }
 
 // SwiftStorage deploy Swift storage.
-// The method takes the following commands:
+// The method takes the following commands of Playback:
 //  playback --ansible 'openstack_swift_storage.yml --extra-vars "host=compute05 my_storage_ip=192.168.1.16" -vvvv'
 //  playback --ansible 'openstack_swift_storage.yml --extra-vars "host=compute06 my_storage_ip=192.168.1.15" -vvvv'
 func (vars ExtraVars) SwiftStorage() error {
@@ -238,7 +238,7 @@ func (vars ExtraVars) SwiftStorage() error {
 }
 
 // SwiftProxy deploy Swift proxy HA.
-// The method takes the following commands:
+// The method takes the following commands of Playback:
 //  playback --ansible 'openstack_swift_proxy.yml --extra-vars "host=controller01" -vvvv'
 //  playback --ansible 'openstack_swift_proxy.yml --extra-vars "host=controller02" -vvvv'  
 func (vars ExtraVars) SwiftProxy() error {
@@ -247,7 +247,7 @@ func (vars ExtraVars) SwiftProxy() error {
 }
 
 // InitSwiftRings initial Swift rings.
-// The method takes the following command:
+// The method takes the following commands of Playback:
 //  playback --ansible 'openstack_swift_builder_file.yml -vvvv'
 //  playback --ansible 'openstack_swift_add_node_to_the_ring.yml --extra-vars "swift_storage_storage_ip=192.168.1.16 device_name=sdb1 device_weight=100" -vvvv'
 //  playback --ansible 'openstack_swift_add_node_to_the_ring.yml --extra-vars "swift_storage_storage_ip=192.168.1.16 device_name=sdc1 device_weight=100" -vvvv'
@@ -273,7 +273,7 @@ func (vars ExtraVars) DistSwiftRingConf() error {
 }
 
 // FinalizeSwift finalize Swift installation.
-// The method takes the following commands:
+// The method takes the following commands of Playback:
 //  playback --ansible 'openstack_swift_finalize_installation.yml --extra-vars "hosts=swift_proxy" -vvvv'
 //  playback --ansible 'openstack_swift_finalize_installation.yml --extra-vars "hosts=swift_storage" -vvvv'
 func (vars ExtraVars) FinalizeSwift() error {
@@ -282,7 +282,7 @@ func (vars ExtraVars) FinalizeSwift() error {
 }
 
 // Glance deploy Glance HA.
-// The method takes the following commands:
+// The method takes the following commands of Playback:
 //  playback --ansible 'openstack_glance.yml --extra-vars "host=controller01" -vvvv'
 //  playback --ansible 'openstack_glance.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) Glance() error {
@@ -295,7 +295,7 @@ func (vars ExtraVars) Glance() error {
 // Copy SSH public key to each Ceph node from Ceph admin node:
 //  ssh-keygen
 //  ssh-copy-id ubuntu@ceph_node
-// The method takes the following command:
+// The method takes the following command of Playback:
 //  playback --ansible 'openstack_ceph_admin.yml -vvvv'
 func (vars ExtraVars) CephAdmin() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_admin.yml", "-vvvv")
@@ -303,7 +303,7 @@ func (vars ExtraVars) CephAdmin() error {
 }
 
 // CephInitMon deploy the Ceph initial monitor.
-// The method takes the following command:
+// The method takes the following command of Playback:
 //  playback --ansible 'openstack_ceph_initial_mon.yml -vvvv'
 func (vars ExtraVars) CephInitMon() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_initial_mon.yml", "-vvvv")
