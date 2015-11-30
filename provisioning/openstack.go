@@ -311,7 +311,17 @@ func (vars ExtraVars) CephInitMon() error {
 }
 
 // CephClient deploy the Ceph client.
+// The method takes the following commands:
+//  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=controller01" -vvvv'
+//  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=controller02" -vvvv'
+//  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=compute01" -vvvv'
+//  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=compute02" -vvvv'
+//  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=compute03" -vvvv'
+//  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=compute04" -vvvv'
+//  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=compute05" -vvvv'
+//  playback --ansible 'openstack_ceph_client.yml --extra-vars "client=compute06" -vvvv'
 func (vars ExtraVars) CephClient() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_client.yml", "--extra-vars", "client="+vars.ClientName, "-vvvv")
 	return nil
 }
 
