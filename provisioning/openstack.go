@@ -105,7 +105,7 @@ type ExtraVars struct {
 	// Vars: my_storage_ip
 	MyStorageIP string
 	// Vars: swift_storage_storage_ip
-	SwiftStorageStorageIP string
+	SwiftStorageStorageIP []string
 	// Vars: device_name
 	DeviceName string
 	// Vars: device_weight
@@ -247,7 +247,20 @@ func (vars ExtraVars) SwiftProxy() error {
 }
 
 // InitSwiftRings initial Swift rings.
+// The method takes the following command:
+//  playback --ansible 'openstack_swift_builder_file.yml -vvvv'
+//  playback --ansible 'openstack_swift_add_node_to_the_ring.yml --extra-vars "swift_storage_storage_ip=192.168.1.16 device_name=sdb1 device_weight=100" -vvvv'
+//  playback --ansible 'openstack_swift_add_node_to_the_ring.yml --extra-vars "swift_storage_storage_ip=192.168.1.16 device_name=sdc1 device_weight=100" -vvvv'
+//  playback --ansible 'openstack_swift_add_node_to_the_ring.yml --extra-vars "swift_storage_storage_ip=192.168.1.15 device_name=sdb1 device_weight=100" -vvvv'
+//  playback --ansible 'openstack_swift_add_node_to_the_ring.yml --extra-vars "swift_storage_storage_ip=192.168.1.15 device_name=sdc1 device_weight=100" -vvvv'
+//  playback --ansible 'openstack_swift_rebalance_ring.yml -vvvv'
 func (vars ExtraVars) InitSwiftRings() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_builder_file.yml", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[0], "device_name=sdb1", "device_weight=100", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[0], "device_name=sdc1", "device_weight=100", "-vvvv")	
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[1], "device_name=sdb1", "device_weight=100", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[1], "device_name=sdc1", "device_weight=100", "-vvvv")	
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_rebalance_ring.yml", "-vvvv")
 	return nil
 }
 
