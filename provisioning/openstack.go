@@ -171,6 +171,8 @@ func (vars ExtraVars) LoadBalancer() error {
 }
 
 // LBOptimize optimizing load balancer.
+// the method takes the floowing command:
+//  python patch-limits.py
 func (vars ExtraVars) LBOptimize() error {
 	command.ExecuteWithOutput("python patch-limits.py")
 	return nil
@@ -198,16 +200,29 @@ func (vars ExtraVars) MariadbCluster() error {
 }
 
 // RabbtmqCluster deploy RabbitMQ Cluster.
+// The method takes the following commands:
+//  playback --ansible 'openstack_rabbitmq.yml --extra-vars "host=controller01" -vvvv'
+//  playback --ansible 'openstack_rabbitmq.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) RabbtmqCluster() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_rabbitmq.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
 // Keystone method deploy the Keystone components.
+// The method takes the following commands:
+//  playback --ansible 'openstack_keystone.yml --extra-vars "host=controller01" -vvvv'
+//  playback --ansible 'openstack_keystone.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) Keystone() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_keystone.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
 // FormatDiskForSwift formats devices for Swift Storage (sdb1 and sdc1).
+// Each of the swift nodes, /dev/sdb1 and /dev/sdc1, must contain a suitable partition table with one partition occupying the entire device.
+// Although the Object Storage service supports any file system with extended attributes (xattr), testing and benchmarking indicate the best performance and reliability on XFS.
+// The method takes the folowing commands:
+//  playback --ansible 'openstack_storage_partitions.yml --extra-vars "host=compute05" -vvvv'
+//  playback --ansible 'openstack_storage_partitions.yml --extra-vars "host=compute06" -vvvv'
 func (vars ExtraVars) FormatDiskForSwift() error {
 	return nil
 }
