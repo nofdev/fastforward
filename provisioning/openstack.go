@@ -326,7 +326,10 @@ func (vars ExtraVars) CephClient() error {
 }
 
 // GetCephKey add Ceph initial monitors and gather the keys.
+// The method takes the following command:
+//  playback --ansible 'openstack_ceph_gather_keys.yml -vvvv'
 func (vars ExtraVars) GetCephKey() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_gather_keys.yml", "-vvvv")
 	return nil
 }
 
