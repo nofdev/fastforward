@@ -385,12 +385,19 @@ func (vars ExtraVars) SyncCephKey() error {
 }
 
 // CephUserPool creates the cinder ceph user and pool name.
+// The method takes the following command of Playback:
+//  playback --ansible 'openstack_ceph_cinder_pool_user.yml -vvvv'
 func (vars ExtraVars) CephUserPool() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_cinder_pool_user.yml", "-vvvv")
 	return nil
 }
 
 // CinderAPI deploy cinder-api.
+// The method takes the following command of Playback:
+//  playback --ansible 'openstack_cinder_api.yml --extra-vars "host=controller01" -vvvv'
+//  playback --ansible 'openstack_cinder_api.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) CinderAPI() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_cinder_api.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
