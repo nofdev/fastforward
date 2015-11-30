@@ -402,7 +402,20 @@ func (vars ExtraVars) CinderAPI() error {
 }
 
 // CinderVolume deploy cinder-volume on controller node(ceph backend).
+// The method takes the following command of Playback:
+//  playback --ansible 'openstack_cinder_volume_ceph.yml --extra-vars "host=controller01" -vvvv'
+//  playback --ansible 'openstack_cinder_volume_ceph.yml --extra-vars "host=controller02" -vvvv'
+// Copy the ceph.client.cinder.keyring from ceph-admin node to /etc/ceph/ceph.client.cinder.keyring of cinder volume nodes and nova-compute nodes to using the ceph client:
+//  ceph auth get-or-create client.cinder | ssh ubuntu@controller01 sudo tee /etc/ceph/ceph.client.cinder.keyring
+//  ceph auth get-or-create client.cinder | ssh ubuntu@controller02 sudo tee /etc/ceph/ceph.client.cinder.keyring
+//  ceph auth get-or-create client.cinder | ssh ubuntu@compute01 sudo tee /etc/ceph/ceph.client.cinder.keyring
+//  ceph auth get-or-create client.cinder | ssh ubuntu@compute02 sudo tee /etc/ceph/ceph.client.cinder.keyring
+//  ceph auth get-or-create client.cinder | ssh ubuntu@compute03 sudo tee /etc/ceph/ceph.client.cinder.keyring
+//  ceph auth get-or-create client.cinder | ssh ubuntu@compute04 sudo tee /etc/ceph/ceph.client.cinder.keyring
+//  ceph auth get-or-create client.cinder | ssh ubuntu@compute05 sudo tee /etc/ceph/ceph.client.cinder.keyring
+//  ceph auth get-or-create client.cinder | ssh ubuntu@compute06 sudo tee /etc/ceph/ceph.client.cinder.keyring
 func (vars ExtraVars) CinderVolume() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_cinder_volume_ceph.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
