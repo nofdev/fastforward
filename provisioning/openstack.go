@@ -238,7 +238,11 @@ func (vars ExtraVars) SwiftStorage() error {
 }
 
 // SwiftProxy deploy Swift proxy HA.
+// The method takes the following commands:
+//  playback --ansible 'openstack_swift_proxy.yml --extra-vars "host=controller01" -vvvv'
+//  playback --ansible 'openstack_swift_proxy.yml --extra-vars "host=controller02" -vvvv'  
 func (vars ExtraVars) SwiftProxy() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_proxy.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
