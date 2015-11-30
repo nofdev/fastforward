@@ -224,11 +224,16 @@ func (vars ExtraVars) Keystone() error {
 //  playback --ansible 'openstack_storage_partitions.yml --extra-vars "host=compute05" -vvvv'
 //  playback --ansible 'openstack_storage_partitions.yml --extra-vars "host=compute06" -vvvv'
 func (vars ExtraVars) FormatDiskForSwift() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_storage_partitions.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
 // SwiftStorage deploy Swift storage.
+// The method takes the following commands:
+//  playback --ansible 'openstack_swift_storage.yml --extra-vars "host=compute05 my_storage_ip=192.168.1.16" -vvvv'
+//  playback --ansible 'openstack_swift_storage.yml --extra-vars "host=compute06 my_storage_ip=192.168.1.15" -vvvv'
 func (vars ExtraVars) SwiftStorage() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_storage.yml", "--extra-vars", "host="+vars.HostName, "my_storage_ip="+vars.MyStorageIP, "-vvvv")
 	return nil
 }
 
