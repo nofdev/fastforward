@@ -78,6 +78,8 @@ type ExtraVars struct {
 	Playbook string
 	// Vars: node_name
 	NodeName string
+	// Vars: node
+	Node []string
 	// Vars: host
 	HostIP string
 	// Vars: storage_ip
@@ -334,7 +336,22 @@ func (vars ExtraVars) GetCephKey() error {
 }
 
 // AddOSD add the Ceph OSDs.
+// Only sopport sdb and sdc.
+// The method takes the following commands:
+//  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute01 disk=sdb partition=sdb1" -vvvv'
+//  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute01 disk=sdc partition=sdc1" -vvvv'
+//  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute02 disk=sdb partition=sdb1" -vvvv'
+//  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute02 disk=sdc partition=sdc1" -vvvv'
+//  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute03 disk=sdb partition=sdb1" -vvvv'
+//  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute03 disk=sdc partition=sdc1" -vvvv'
+//  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute04 disk=sdb partition=sdb1" -vvvv'
+//  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute04 disk=sdc partition=sdc1" -vvvv'
+// Only support two nodes for sdb and sdc currently.
 func (vars ExtraVars) AddOSD() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.Node[0], "disk=sdb", "partition=sdb1", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.Node[0], "disk=sdc", "partition=sdc1", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.Node[1], "disk=sdb", "partition=sdb1", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.Node[1], "disk=sdc", "partition=sdc1", "-vvvv")
 	return nil
 }
 
