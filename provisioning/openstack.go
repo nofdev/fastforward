@@ -162,6 +162,9 @@ func (vars ExtraVars) ConfigureStorageNetwork() error {
 }
 
 // LoadBalancer deploy a HAProxy and Keepalived for OpenStack HA.
+// The method takes the following command:
+//  playback --ansible 'openstack_haproxy.yml --extra-vars "host=lb01 router_id=lb01 state=MASTER priority=150" -vvvv'
+//  playback --ansible 'openstack_haproxy.yml --extra-vars "host=lb02 router_id=lb02 state=SLAVE priority=100" -vvvv'
 func (vars ExtraVars) LoadBalancer() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_haproxy.yml", "--extra-vars", "host="+vars.HostName, "router_id="+vars.RouterID, "state="+vars.State, "priority="+vars.Priority, "-vvvv")
 	return nil
@@ -174,13 +177,15 @@ func (vars ExtraVars) LBOptimize() error {
 }
 
 // PrepareBasicEnvirionment prepares OpenStack basic environment.
+// The method takes the following command:
+//  playback --ansible 'openstack_basic_environment.yml -vvvv'
 func (vars ExtraVars) PrepareBasicEnvirionment() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_basic_environment.yml", "-vvvv")
 	return nil
 }
 
 // MariadbCluster deploy MariaDB Cluster.
-// The mothod execute the following commands:
+// The method takes the following commands:
 //  playback --ansible 'openstack_mariadb.yml --extra-vars "host=controller01 my_ip=192.169.151.19" -vvvv'
 //  playback --ansible 'openstack_mariadb.yml --extra-vars "host=controller02 my_ip=192.169.151.17" -vvvv'
 //  python keepalived.py
