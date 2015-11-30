@@ -369,7 +369,18 @@ func (vars ExtraVars) AddCephMon() error {
 }
 
 // SyncCephKey copy the Ceph keys to nodes.
+// Copy the configuration file and admin key to your admin node and your Ceph Nodes so that you can use the ceph CLI without having to specify the monitor address and ceph.client.admin.keyring each time you execute a command.
+// The method takes the following commands of Playback:
+//  playback --ansible 'openstack_ceph_copy_keys.yml --extra-vars "node=controller01" -vvvv'
+//  playback --ansible 'openstack_ceph_copy_keys.yml --extra-vars "node=controller02" -vvvv'
+//  playback --ansible 'openstack_ceph_copy_keys.yml --extra-vars "node=compute01" -vvvv'
+//  playback --ansible 'openstack_ceph_copy_keys.yml --extra-vars "node=compute02" -vvvv'
+//  playback --ansible 'openstack_ceph_copy_keys.yml --extra-vars "node=compute03" -vvvv'
+//  playback --ansible 'openstack_ceph_copy_keys.yml --extra-vars "node=compute04" -vvvv'
+//  playback --ansible 'openstack_ceph_copy_keys.yml --extra-vars "node=compute05" -vvvv'
+//  playback --ansible 'openstack_ceph_copy_keys.yml --extra-vars "node=compute06" -vvvv'
 func (vars ExtraVars) SyncCephKey() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_copy_keys.yml", "--extra-vars", "node="+vars.Node, "-vvvv")
 	return nil
 }
 
