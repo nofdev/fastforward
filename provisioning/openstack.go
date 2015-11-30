@@ -282,7 +282,11 @@ func (vars ExtraVars) FinalizeSwift() error {
 }
 
 // Glance deploy Glance HA.
+// The method takes the following commands:
+//  playback --ansible 'openstack_glance.yml --extra-vars "host=controller01" -vvvv'
+//  playback --ansible 'openstack_glance.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) Glance() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_glance.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
