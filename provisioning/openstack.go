@@ -10,6 +10,8 @@ type OpenStack interface {
 	ConfigureStorageNetwork()
 	// Deploy HAProxy and keepalived.
 	LoadBalancer()
+	// LBOptimize optimizing load balancer.
+	LBOptimize()
 	// Deploy MariaDB cluster.
 	MariadbCluster()
 	// Deploy RabbitMQ cluster.
@@ -95,7 +97,7 @@ type ExtraVars struct {
 	// Vars: state
 	State string
 	// Vars: priority
-	Priority int
+	Priority string
 	// Python scripts *.py
 	PythonScript string
 	// Vars: my_ip
@@ -143,7 +145,6 @@ type PlaybackNic struct {
 }
 
 // ConfigureStorageNetwork takes playback-nic to set up the storage network.
-// Playback examples:
 // Purge the configuration and set address to 192.169.151.19 for eth1 of host 192.169.150.19 as public interface:
 //	playback-nic --purge --public --host 192.169.150.19 --user ubuntu --address 192.169.151.19 --nic eth1 --netmask 255.255.255.0 --gateway 192.169.151.1 --dns-nameservers "192.169.11.11 192.169.11.12"
 //Setting address to 192.168.1.12 for eth2 of host 192.169.150.19 as private interface:
@@ -162,6 +163,13 @@ func (vars ExtraVars) ConfigureStorageNetwork() error {
 
 // LoadBalancer deploy a HAProxy and Keepalived for OpenStack HA.
 func (vars ExtraVars) LoadBalancer() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_haproxy.yml", "--extra-vars", "host="+vars.HostName, "router_id="+vars.RouterID, "state="+vars.State, "priority="+vars.Priority, "-vvvv")
+	return nil
+}
+
+// LBOptimize optimizing load balancer.
+func (vars ExtraVars) LBOptimize() error {
+	command.ExecuteWithOutput("python patch-limits.py")
 	return nil
 }
 
