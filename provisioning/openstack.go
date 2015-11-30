@@ -180,7 +180,15 @@ func (vars ExtraVars) PrepareBasicEnvirionment() error {
 }
 
 // MariadbCluster deploy MariaDB Cluster.
+// The mothod execute the following commands:
+//  playback --ansible 'openstack_mariadb.yml --extra-vars "host=controller01 my_ip=192.169.151.19" -vvvv'
+//  playback --ansible 'openstack_mariadb.yml --extra-vars "host=controller02 my_ip=192.169.151.17" -vvvv'
+//  python keepalived.py
 func (vars ExtraVars) MariadbCluster() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_mariadb.yml", "--extra-vars", "host="+vars.HostName, "my_ip="+vars.MyIP, "-vvvv")
+	if vars.HostName == "controller02" {
+		command.ExecuteWithOutput("python keepalived.py")
+	}
 	return nil
 }
 
