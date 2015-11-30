@@ -79,7 +79,9 @@ type ExtraVars struct {
 	// Vars: node_name
 	NodeName string
 	// Vars: node
-	Node []string
+	NodeSlice []string
+	// Vars: node
+	Node string
 	// Vars: host
 	HostIP string
 	// Vars: storage_ip
@@ -348,15 +350,21 @@ func (vars ExtraVars) GetCephKey() error {
 //  playback --ansible 'openstack_ceph_osd.yml --extra-vars "node=compute04 disk=sdc partition=sdc1" -vvvv'
 // Only support two nodes for sdb and sdc currently.
 func (vars ExtraVars) AddOSD() error {
-	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.Node[0], "disk=sdb", "partition=sdb1", "-vvvv")
-	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.Node[0], "disk=sdc", "partition=sdc1", "-vvvv")
-	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.Node[1], "disk=sdb", "partition=sdb1", "-vvvv")
-	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.Node[1], "disk=sdc", "partition=sdc1", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.NodeSlice[0], "disk=sdb", "partition=sdb1", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.NodeSlice[0], "disk=sdc", "partition=sdc1", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.NodeSlice[1], "disk=sdb", "partition=sdb1", "-vvvv")
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_osd.yml", "--extra-vars", "node="+vars.NodeSlice[1], "disk=sdc", "partition=sdc1", "-vvvv")
 	return nil
 }
 
 // AddCephMon add the Ceph monitors.
+// The method takes the following command of Playback:
+//  playback --ansible 'openstack_ceph_mon.yml --extra-vars "node=compute01" -vvvv'
+//  playback --ansible 'openstack_ceph_mon.yml --extra-vars "node=compute02" -vvvv'
+//  playback --ansible 'openstack_ceph_mon.yml --extra-vars "node=compute03" -vvvv'
+//  playback --ansible 'openstack_ceph_mon.yml --extra-vars "node=compute04" -vvvv'
 func (vars ExtraVars) AddCephMon() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_mon.yml", "--extra-vars", "node="+vars.Node, "-vvvv")
 	return nil
 }
 
