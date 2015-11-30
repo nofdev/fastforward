@@ -273,7 +273,11 @@ func (vars ExtraVars) DistSwiftRingConf() error {
 }
 
 // FinalizeSwift finalize Swift installation.
+// The method takes the following commands:
+//  playback --ansible 'openstack_swift_finalize_installation.yml --extra-vars "hosts=swift_proxy" -vvvv'
+//  playback --ansible 'openstack_swift_finalize_installation.yml --extra-vars "hosts=swift_storage" -vvvv'
 func (vars ExtraVars) FinalizeSwift() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_finalize_installation.yml", "--extra-vars", "hosts="+vars.Hosts, "-vvvv")
 	return nil
 }
 
