@@ -291,12 +291,22 @@ func (vars ExtraVars) Glance() error {
 }
 
 // CephAdmin deploy the Ceph admin node.
+// Ensure the admin node must be have password-less SSH access to Ceph nodes. When ceph-deploy logs in to a Ceph node as a user, that particular user must have passwordless sudo privileges.
+// Copy SSH public key to each Ceph node from Ceph admin node:
+//  ssh-keygen
+//  ssh-copy-id ubuntu@ceph_node
+// The method takes the following command:
+//  playback --ansible 'openstack_ceph_admin.yml -vvvv'
 func (vars ExtraVars) CephAdmin() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_admin.yml", "-vvvv")
 	return nil
 }
 
 // CephInitMon deploy the Ceph initial monitor.
+// The method takes the following command:
+//  playback --ansible 'openstack_ceph_initial_mon.yml -vvvv'
 func (vars ExtraVars) CephInitMon() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_ceph_initial_mon.yml", "-vvvv")
 	return nil
 }
 
