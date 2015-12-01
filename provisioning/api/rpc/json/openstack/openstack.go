@@ -1,3 +1,4 @@
+// Package openstack provides an API of JSON-RPC 2.0 for Playback.
 package openstack
 
 import (
