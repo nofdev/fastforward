@@ -480,7 +480,11 @@ func (vars ExtraVars) NovaNetwork() error {
 }
 
 // Heat deploy orchestration components(heat).
+// The method takes the following commands of Playback:
+//  playback --ansible 'openstack_heat_controller.yml --extra-vars "host=controller01" -vvvv'
+//  playback --ansible 'openstack_heat_controller.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) Heat() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_heat_controller.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
