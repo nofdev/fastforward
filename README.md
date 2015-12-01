@@ -1,6 +1,8 @@
 # FastForward
 FastForward is a DevOps automate platform.
 
+[![Build Status](https://travis-ci.org/nofdev/fastforward.svg)](https://travis-ci.org/nofdev/fastforward)
+
 ## API Reference
 
 ### Provisioning
