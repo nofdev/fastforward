@@ -420,7 +420,11 @@ func (vars ExtraVars) CinderVolume() error {
 }
 
 // RestartCephDeps restart volume service dependency to take effect for ceph backend.
+// The method takes the following command of Playback:
+//  python restart_cindervol_deps.py ubuntu@controller01 ubuntu@controller02
+// Only support controller01 and controller02 currently.
 func (vars ExtraVars) RestartCephDeps() error {
+	command.ExecuteWithOutput("python", "restart_cindervol_deps.py", "ubuntu@controller01", "ubuntu@controller02")
 	return nil
 }
 
