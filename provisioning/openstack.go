@@ -5,71 +5,71 @@ import "github.com/jiasir/playback/command"
 // OpenStack interface takes methods for provision OpenStack.
 type OpenStack interface {
 	// Prepare OpenStack basic environment.
-	PrepareBasicEnvirionment()
+	PrepareBasicEnvirionment() error
 	// Using playback-nic to setting the network for storage network.
-	ConfigureStorageNetwork()
+	ConfigureStorageNetwork() error
 	// Deploy HAProxy and keepalived.
-	LoadBalancer()
+	LoadBalancer() error
 	// LBOptimize optimizing load balancer.
-	LBOptimize()
+	LBOptimize() error
 	// Deploy MariaDB cluster.
-	MariadbCluster()
+	MariadbCluster() error
 	// Deploy RabbitMQ cluster.
-	RabbtmqCluster()
+	RabbtmqCluster() error
 	// Deploy Keystone HA.
-	Keystone()
+	Keystone() error
 	// Format the disk for Swift storage, only support sdb1 and sdc1 currently.
-	FormatDiskForSwift()
+	FormatDiskForSwift() error
 	// Deploy Swift storage.
-	SwiftStorage()
+	SwiftStorage() error
 	// Deploy Swift proxy HA.
-	SwiftProxy()
+	SwiftProxy() error
 	// Initial Swift rings.
-	InitSwiftRings()
+	InitSwiftRings() error
 	// Distribute Swift ring configuration files.
-	DistSwiftRingConf()
+	DistSwiftRingConf() error
 	// Finalize Swift installation.
-	FinalizeSwift()
+	FinalizeSwift() error
 	// Deploy Glance HA.
-	Glance()
+	Glance() error
 	// Deploy Ceph admin node.
-	CephAdmin()
+	CephAdmin() error
 	// Deploy the Ceph initial monitor.
-	CephInitMon()
+	CephInitMon() error
 	// Deploy the Ceph clients.
-	CephClient()
+	CephClient() error
 	// Add Ceph initial monitor(s) and gather the keys.
-	GetCephKey()
+	GetCephKey() error
 	// Add Ceph OSDs.
-	AddOSD()
+	AddOSD() error
 	// Add Ceph monitors.
-	AddCephMon()
+	AddCephMon() error
 	// Copy the Ceph keys to nodes.
-	SyncCephKey()
+	SyncCephKey() error
 	// Create the cinder ceph user and pool name.
-	CephUserPool()
+	CephUserPool() error
 	// Deploy cinder-api.
-	CinderAPI()
+	CinderAPI() error
 	// Deploy cinder-volume on controller node(Ceph backend).
-	CinderVolume()
+	CinderVolume() error
 	// Restart volume service dependency to take effect for ceph backend.
-	RestartCephDeps()
+	RestartCephDeps() error
 	// Deploy Nova controller.
-	NovaController()
+	NovaController() error
 	// Deploy Horizon.
-	Dashboard()
+	Dashboard() error
 	// Deploy Nova computes.
-	NovaComputes()
+	NovaComputes() error
 	// Deploy Legacy networking nova-network(FlatDHCP Only).
-	NovaNetwork()
+	NovaNetwork() error
 	// Deploy Orchestration components(heat).
-	Heat()
+	Heat() error
 	// Enable service auto start
-	AutoStart()
+	AutoStart() error
 	// Deploy Dns as a Service
-	Designate()
+	Designate() error
 	// Convert kvm to Docker(OPTIONAL)
-	KvmToDocker()
+	KvmToDocker() error
 }
 
 // ExtraVars takes playback command line arguments.
@@ -244,7 +244,7 @@ func (vars ExtraVars) SwiftStorage() error {
 // SwiftProxy deploy Swift proxy HA.
 // The method takes the following commands of Playback:
 //  playback --ansible 'openstack_swift_proxy.yml --extra-vars "host=controller01" -vvvv'
-//  playback --ansible 'openstack_swift_proxy.yml --extra-vars "host=controller02" -vvvv'  
+//  playback --ansible 'openstack_swift_proxy.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) SwiftProxy() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_proxy.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
@@ -261,9 +261,9 @@ func (vars ExtraVars) SwiftProxy() error {
 func (vars ExtraVars) InitSwiftRings() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_builder_file.yml", "-vvvv")
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[0], "device_name=sdb1", "device_weight=100", "-vvvv")
-	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[0], "device_name=sdc1", "device_weight=100", "-vvvv")	
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[0], "device_name=sdc1", "device_weight=100", "-vvvv")
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[1], "device_name=sdb1", "device_weight=100", "-vvvv")
-	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[1], "device_name=sdc1", "device_weight=100", "-vvvv")	
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_add_node_to_the_ring.yml", "--extra-vars", "swift_storage_storage_ip="+vars.SwiftStorageStorageIP[1], "device_name=sdc1", "device_weight=100", "-vvvv")
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_swift_rebalance_ring.yml", "-vvvv")
 	return nil
 }

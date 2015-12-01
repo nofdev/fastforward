@@ -7,7 +7,7 @@ import (
 )
 
 // OpenStack API.
-type OpenStack struct {}
+type OpenStack struct{}
 
 // Args takes extra-vars of Playback
 type Args struct {
@@ -20,6 +20,7 @@ type Result interface{}
 // ConfigureStorageNetwork takes playback-nic to set up the storage network.
 // Args: {"PlaybackNic.Purge": bool, "PlaybackNic.Public": bool, "PlaybackNic.Private": bool, "PlaybackNic.Host": string, "PlaybackNic.User": string, "PlaybackNic.Address": string, "PlaybackNic.NIC": string, "PlaybackNic.Netmask": string, "PlaybackNic.Gateway": string}
 func (o *OpenStack) ConfigureStorageNetwork(r *http.Request, args *Args, result *Result) error {
-	*result = args.ExtraVars.ConfigureStorageNetwork()
+	i := provisioning.OpenStack(args)
+	*result = i.ConfigureStorageNetwork()
 	return nil
 }
