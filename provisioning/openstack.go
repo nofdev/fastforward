@@ -459,7 +459,15 @@ func (vars ExtraVars) NovaComputes() error {
 }
 
 // NovaNetwork deploy legacy networking nova-network(FLATdhcp Only).
+// The method takes the following commands of Playback:
+//  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute01 my_ip=192.169.151.16" -vvvv'
+//  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute02 my_ip=192.169.151.22" -vvvv'
+//  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute03 my_ip=192.169.151.18" -vvvv'
+//  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute04 my_ip=192.169.151.25" -vvvv'
+//  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute05 my_ip=192.169.151.12" -vvvv'
+//  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute06 my_ip=192.169.151.14" -vvvv'
 func (vars ExtraVars) NovaNetwork() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_nova_network_compute.yml", "--extra-vars", "host="+vars.HostName, "my_ip="+vars.MyIP, "-vvvv")
 	return nil
 }
 
