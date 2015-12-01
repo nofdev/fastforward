@@ -489,16 +489,29 @@ func (vars ExtraVars) Heat() error {
 }
 
 // AutoStart fix the service can not auto start when sys booting.
+// The method takes the following command of Playback:
+//  python patch-autostart.py
 func (vars ExtraVars) AutoStart() error {
+	command.ExecuteWithOutput("python", "patch-autostart.py")
 	return nil
 }
 
 // Designate deploy DNS as a Service.
+// The method takes the following command of Playback:
+//  playback --ansible openstack_dns.yml -vvvv
+// Execute on controller01:
+//  bash /mnt/designate-keystone-setup
+//  nohup designate-central > /dev/null 2>&1 &
+//  nohup designate-api > /dev/null 2>&1 &
 func (vars ExtraVars) Designate() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_dns.yml", "-vvvv")
 	return nil
 }
 
 // KvmToDocker converts kvm to docker(OPTIONAL).
+// The method takes the following command of Playback:
+//  playback --novadocker --user ubuntu --hosts compute06
 func (vars ExtraVars) KvmToDocker() error {
+	command.ExecuteWithOutput("playback", "--novadocker", "--user", "ubuntu", "--hosts", "compute06")
 	return nil
 }
