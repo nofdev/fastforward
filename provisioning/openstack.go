@@ -438,7 +438,7 @@ func (vars ExtraVars) NovaController() error {
 }
 
 // Dashboard deploy Horizon.
-// The method takes the following command of playback:
+// The method takes the following command of Playback:
 //  playback --ansible 'openstack_horizon.yml -vvvv'
 func (vars ExtraVars) Dashboard() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_horizon.yml", "-vvvv")
@@ -446,7 +446,15 @@ func (vars ExtraVars) Dashboard() error {
 }
 
 // NovaComputes deploy Nova computes.
+// The method takes the following commands of Playback:
+//  playback --ansible 'openstack_compute_node.yml --extra-vars "host=compute01 my_ip=192.169.151.16" -vvvv'
+//  playback --ansible 'openstack_compute_node.yml --extra-vars "host=compute02 my_ip=192.169.151.22" -vvvv'
+//  playback --ansible 'openstack_compute_node.yml --extra-vars "host=compute03 my_ip=192.169.151.18" -vvvv'
+//  playback --ansible 'openstack_compute_node.yml --extra-vars "host=compute04 my_ip=192.169.151.25" -vvvv'
+//  playback --ansible 'openstack_compute_node.yml --extra-vars "host=compute05 my_ip=192.169.151.12" -vvvv'
+//  playback --ansible 'openstack_compute_node.yml --extra-vars "host=compute06 my_ip=192.169.151.14" -vvvv'
 func (vars ExtraVars) NovaComputes() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_compute_node.yml", "--extra-vars", "host="+vars.HostName, "my_ip="+vars.MyIP, "-vvvv")
 	return nil
 }
 
