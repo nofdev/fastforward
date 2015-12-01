@@ -30,7 +30,7 @@ func (o *OpenStack) ConfigureStorageNetwork(r *http.Request, args *Args, result 
 
 func main() {
 	s := rpc.NewServer()
-	log.Printf("OpenStack API started")
+	log.Printf("Playback API started")
 	s.RegisterCodec(json.NewCodec(), "application/json")
 	openstack := new(OpenStack)
 	s.RegisterService(openstack, "")
