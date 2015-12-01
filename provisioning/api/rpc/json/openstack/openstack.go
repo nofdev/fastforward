@@ -19,7 +19,7 @@ type Args struct {
 type Result interface{}
 
 // ConfigureStorageNetwork takes playback-nic to set up the storage network.
-// Args: {"PlaybackNic.Purge": bool, "PlaybackNic.Public": bool, "PlaybackNic.Private": bool, "PlaybackNic.Host": string, "PlaybackNic.User": string, "PlaybackNic.Address": string, "PlaybackNic.NIC": string, "PlaybackNic.Netmask": string, "PlaybackNic.Gateway": string}
+//  Args: {"PlaybackNic.Purge": bool, "PlaybackNic.Public": bool, "PlaybackNic.Private": bool, "PlaybackNic.Host": string, "PlaybackNic.User": string, "PlaybackNic.Address": string, "PlaybackNic.NIC": string, "PlaybackNic.Netmask": string, "PlaybackNic.Gateway": string}
 func (o *OpenStack) ConfigureStorageNetwork(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.ConfigureStorageNetwork()
@@ -30,6 +30,7 @@ func (o *OpenStack) ConfigureStorageNetwork(r *http.Request, args *Args, result 
 // TODO: Return value of errors.
 
 // LoadBalancer deploy a HAProxy and Keepalived for OpenStack HA.
+//  Args: {"HostName": string, "RouterID": string, "State": string, "Priority": int}
 func (o *OpenStack) LoadBalancer(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.LoadBalancer()
@@ -51,6 +52,7 @@ func (o *OpenStack) PrepareBasicEnvirionment(r *http.Request, args *Args, result
 }
 
 // MariadbCluster deploy MariaDB Cluster.
+//  Args: {"HostName": string, "MyIP": string}
 func (o *OpenStack) MariadbCluster(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.MariadbCluster()
@@ -58,6 +60,7 @@ func (o *OpenStack) MariadbCluster(r *http.Request, args *Args, result *Result) 
 }
 
 // RabbtmqCluster deploy RabbitMQ Cluster.
+//  Args: {"HostName": string}
 func (o *OpenStack) RabbtmqCluster(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.RabbtmqCluster()
@@ -65,6 +68,7 @@ func (o *OpenStack) RabbtmqCluster(r *http.Request, args *Args, result *Result) 
 }
 
 // Keystone method deploy the Keystone components.
+//  Args: {"HostName": string, }
 func (o *OpenStack) Keystone(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.Keystone()
@@ -72,6 +76,7 @@ func (o *OpenStack) Keystone(r *http.Request, args *Args, result *Result) error 
 }
 
 // FormatDiskForSwift formats devices for Swift Storage (sdb1 and sdc1).
+//  Args: {"HostName": string}
 func (o *OpenStack) FormatDiskForSwift(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.FormatDiskForSwift()
@@ -79,6 +84,7 @@ func (o *OpenStack) FormatDiskForSwift(r *http.Request, args *Args, result *Resu
 }
 
 // SwiftStorage deploy Swift storage.
+//  Args: {"HostName": string}
 func (o *OpenStack) SwiftStorage(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.SwiftStorage()
@@ -86,6 +92,7 @@ func (o *OpenStack) SwiftStorage(r *http.Request, args *Args, result *Result) er
 }
 
 // SwiftProxy deploy Swift proxy HA.
+//  Args: {"HostName": string}
 func (o *OpenStack) SwiftProxy(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.SwiftProxy()
@@ -93,6 +100,7 @@ func (o *OpenStack) SwiftProxy(r *http.Request, args *Args, result *Result) erro
 }
 
 // InitSwiftRings initial Swift rings.
+//  Args: {"SwiftStorageStorageIP[0]": string, "SwiftStorageStorageIP[1]": string}
 func (o *OpenStack) InitSwiftRings(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.InitSwiftRings()
@@ -107,6 +115,7 @@ func (o *OpenStack) DistSwiftRingConf(r *http.Request, args *Args, result *Resul
 }
 
 // FinalizeSwift finalize Swift installation.
+//  Args: {"Hosts": string}
 func (o *OpenStack) FinalizeSwift(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.FinalizeSwift()
@@ -114,6 +123,7 @@ func (o *OpenStack) FinalizeSwift(r *http.Request, args *Args, result *Result) e
 }
 
 // Glance deploy Glance HA.
+// Args: {"HostName": string}
 func (o *OpenStack) Glance(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.Glance()
@@ -135,6 +145,7 @@ func (o *OpenStack) CephInitMon(r *http.Request, args *Args, result *Result) err
 }
 
 // CephClient deploy the Ceph client.
+//  Args: {"ClientName": string}
 func (o *OpenStack) CephClient(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.CephClient()
@@ -149,6 +160,7 @@ func (o *OpenStack) GetCephKey(r *http.Request, args *Args, result *Result) erro
 }
 
 // AddOSD add the Ceph OSDs.
+//  Args: {"NodeSlice[0]": string, "NodeSlice[1]": string}
 func (o *OpenStack) AddOSD(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.AddOSD()
@@ -156,6 +168,7 @@ func (o *OpenStack) AddOSD(r *http.Request, args *Args, result *Result) error {
 }
 
 // AddCephMon add the Ceph monitors.
+//  Args: {"Node": string}
 func (o *OpenStack) AddCephMon(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.AddCephMon()
@@ -163,6 +176,7 @@ func (o *OpenStack) AddCephMon(r *http.Request, args *Args, result *Result) erro
 }
 
 // SyncCephKey copy the Ceph keys to nodes.
+//  Args: {"Node": string}
 func (o *OpenStack) SyncCephKey(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.SyncCephKey()
@@ -177,6 +191,7 @@ func (o *OpenStack) CephUserPool(r *http.Request, args *Args, result *Result) er
 }
 
 // CinderAPI deploy cinder-api.
+//  Args: {"HostName": string}
 func (o *OpenStack) CinderAPI(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.CinderAPI()
@@ -184,6 +199,7 @@ func (o *OpenStack) CinderAPI(r *http.Request, args *Args, result *Result) error
 }
 
 // CinderVolume deploy cinder-volume on controller node(ceph backend).
+//  Args: {"HostName": string}
 func (o *OpenStack) CinderVolume(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.CinderVolume()
@@ -198,6 +214,7 @@ func (o *OpenStack) RestartCephDeps(r *http.Request, args *Args, result *Result)
 }
 
 // NovaController deploy Nova controller.
+//  Args: {"HostName": string}
 func (o *OpenStack) NovaController(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.NovaController()
@@ -212,6 +229,7 @@ func (o *OpenStack) Dashboard(r *http.Request, args *Args, result *Result) error
 }
 
 // NovaComputes deploy Nova computes.
+//  Args: {"HostName": string, "MyIP": string}
 func (o *OpenStack) NovaComputes(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.NovaComputes()
@@ -219,6 +237,7 @@ func (o *OpenStack) NovaComputes(r *http.Request, args *Args, result *Result) er
 }
 
 // NovaNetwork deploy legacy networking nova-network(FLATdhcp Only).
+//  Args: {"HostName": string, "MyIP": string}
 func (o *OpenStack) NovaNetwork(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.NovaNetwork()
@@ -226,6 +245,7 @@ func (o *OpenStack) NovaNetwork(r *http.Request, args *Args, result *Result) err
 }
 
 // Heat deploy orchestration components(heat).
+//  Args: {"HostName": string}
 func (o *OpenStack) Heat(r *http.Request, args *Args, result *Result) error {
 	i := provisioning.OpenStack(args)
 	*result = i.Heat()
