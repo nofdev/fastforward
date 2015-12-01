@@ -466,6 +466,14 @@ func (vars ExtraVars) NovaComputes() error {
 //  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute04 my_ip=192.169.151.25" -vvvv'
 //  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute05 my_ip=192.169.151.12" -vvvv'
 //  playback --ansible 'openstack_nova_network_compute.yml --extra-vars "host=compute06 my_ip=192.169.151.14" -vvvv'
+// Create initial network. For example, using an exclusive slice of 172.16.0.0/16 with IP address range 172.16.0.1 to 172.16.255.254:
+//  nova network-create ext-net --bridge br100 --multi-host T --fixed-range-v4 172.16.0.0/16
+//  nova floating-ip-bulk-create --pool ext-net 192.169.151.65/26
+//  nova floating-ip-bulk-list
+// Extend the demo-net pool:
+//  nova floating-ip-bulk-create --pool ext-net 192.169.151.128/26
+//  nova floating-ip-bulk-create --pool ext-net 192.169.151.192/26
+//  nova floating-ip-bulk-list
 func (vars ExtraVars) NovaNetwork() error {
 	command.ExecuteWithOutput("playback", "--ansible", "openstack_nova_network_compute.yml", "--extra-vars", "host="+vars.HostName, "my_ip="+vars.MyIP, "-vvvv")
 	return nil
