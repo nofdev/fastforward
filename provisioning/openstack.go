@@ -429,12 +429,19 @@ func (vars ExtraVars) RestartCephDeps() error {
 }
 
 // NovaController deploy Nova controller.
+// The method takes the following commands of Playback:
+//  playback --ansible 'openstack_compute_controller.yml --extra-vars "host=controller01" -vvvv'
+//  playback --ansible 'openstack_compute_controller.yml --extra-vars "host=controller02" -vvvv'
 func (vars ExtraVars) NovaController() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_compute_controller.yml", "--extra-vars", "host="+vars.HostName, "-vvvv")
 	return nil
 }
 
 // Dashboard deploy Horizon.
+// The method takes the following command of playback:
+//  playback --ansible 'openstack_horizon.yml -vvvv'
 func (vars ExtraVars) Dashboard() error {
+	command.ExecuteWithOutput("playback", "--ansible", "openstack_horizon.yml", "-vvvv")
 	return nil
 }
 
