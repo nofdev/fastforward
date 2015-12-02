@@ -5,9 +5,13 @@ FastForward is a DevOps automate platform.
 
 ## API Reference
 
-### Provisioning
+### Basic Provisioning API
 [![GoDoc](https://godoc.org/github.com/nofdev/fastforward/provisioning?status.svg)](https://godoc.org/github.com/nofdev/fastforward/provisioning)
 
+Endpoint:
+
+	http://0.0.0.0:7000/v1
+	
 Example Request:
 
 	./jsonrpctest.py http://YOUR_FF_SERVER:7000/v1 \
@@ -20,11 +24,9 @@ Example Request:
 	'UseSudo': true, \
 	'CmdLine': 'echo FastForward'}"
 
-
 Example Response:
 
 	{u'id': 1, u'result': u'FastForward\n', u'error': None}
-	
 	
 Query Parameters:
 * User - The username for remote server.
@@ -39,3 +41,21 @@ Status Codes:
 * 200 - No error.
 * 400 - Bad parameter.
 * 500 - Server error.
+
+### OpenStack Provisioning API
+[![GoDoc](https://godoc.org/github.com/nofdev/fastforward/provisioning/api/rpc/json/openstack?status.svg)](https://godoc.org/github.com/nofdev/fastforward/provisioning/api/rpc/json/openstack)
+
+Endpoint:
+
+	http://0.0.0.0:7001/v1
+
+Example Request:
+
+	./jsonrpctest.py http://YOUR_FF_SERVER:7001/v1 \
+	OpenStack.NovaController \
+	"{'HostName': 'controller01'}"
+
+Example Resopnse:
+
+	{u'id': 1, u'result': None, u'error': None}
+
