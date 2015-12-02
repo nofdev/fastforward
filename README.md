@@ -8,6 +8,10 @@ FastForward is a DevOps automate platform.
 ### Basic Provisioning API
 [![GoDoc](https://godoc.org/github.com/nofdev/fastforward/provisioning?status.svg)](https://godoc.org/github.com/nofdev/fastforward/provisioning)
 
+Start the API endpoint:
+
+	ff provision-api start
+
 Endpoint:
 
 	http://0.0.0.0:7000/v1
@@ -44,6 +48,10 @@ Status Codes:
 
 ### OpenStack Provisioning API
 [![GoDoc](https://godoc.org/github.com/nofdev/fastforward/provisioning/api/rpc/json/openstack?status.svg)](https://godoc.org/github.com/nofdev/fastforward/provisioning/api/rpc/json/openstack)
+
+Start the API endpoint:
+
+	ff playback-api start
 
 Endpoint:
 
