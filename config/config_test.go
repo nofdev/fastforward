@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alyu/configparser"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestReadConfig(t *testing.T) {
@@ -12,5 +13,38 @@ func TestReadConfig(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	log.Println(config)
+	log.Printf("full configuration:\n%s", config)
+}
+
+func TestSection(t *testing.T) {
+	config, err := configparser.Read("fastforward.conf")
+	if err != nil {
+		t.Error(err)
+	}
+	section, err := config.Section("DEFAULT")
+	if err != nil {
+		t.Error(err)
+	}
+	log.Printf("the default section:\n%s", section)
+
+	section, err = config.Section("PLAYBACK")
+	if err != nil {
+		t.Error(err)
+	}
+	log.Printf("the playback section:\n%s", section)
+
+}
+
+func TestOption(t *testing.T) {
+	config, err := configparser.Read("fastforward.conf")
+	if err != nil {
+		t.Error(err)
+	}
+	section, err := config.Section("DEFAULT")
+	if err != nil {
+		t.Error(err)
+	}
+	options := section.Options()
+	log.Printf("option names:\n%s", options["provisioning_driver"])
+	assert.Equal(t, "playback", options["provisioning_driver"])
 }
