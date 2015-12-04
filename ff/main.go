@@ -4,6 +4,7 @@ import "os"
 import "log"
 import "github.com/mitchellh/cli"
 import "github.com/jiasir/playback/command"
+import "github.com/nofdev/fastforward/config"
 
 func main() {
 	c := cli.NewCLI("FastForward", "0.0.1")
@@ -22,6 +23,10 @@ func main() {
 
 type provision struct{}
 type playback struct{}
+
+// c is the FastForward configuration instance.
+var conf *config.Conf
+var c = conf.LoadConf()
 
 // Run takes provision-api command.
 func (p provision) Run(args []string) int {
@@ -49,11 +54,15 @@ func provisionCommandFactory() (cli.Command, error) {
 
 // Run takes playback-api command.
 func (p playback) Run(args []string) int {
-	for _, arg :=range args {
+	for _, arg := range args {
 		if arg == "start" {
-			command.ExecuteWithOutput("playback-api")
+			if c.DEFAULT["provisioning_driver"] == "playback" {
+				command.ExecuteWithOutput("playback-api")
+			} else {
+				log.Fatalf("The driver is not playback, current is: %s", c.DEFAULT["provisioning_driver"])
+			}
 		}
-	}	
+	}
 	return 0
 }
 
