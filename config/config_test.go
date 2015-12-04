@@ -48,3 +48,10 @@ func TestOption(t *testing.T) {
 	log.Printf("option names:\n%s", options["provisioning_driver"])
 	assert.Equal(t, "playback", options["provisioning_driver"])
 }
+
+func TestLoadConf(t *testing.T) {
+	var v Conf
+	conf := v.LoadConf()
+	log.Printf("LoadConf:\n%s", conf)
+	assert.Equal(t, "playback", conf.DEFAULT["provisioning_driver"])
+}
