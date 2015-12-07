@@ -11,7 +11,7 @@ func main() {
 	c.Args = os.Args[1:]
 	c.Commands = map[string]cli.CommandFactory{
 		"provision-api": provisionCommandFactory,
-		"playback-api":  playbackCommandFactory,
+		"playback-api":  playbackAPICommandFactory,
 	}
 
 	exitStatus, err := c.Run()
@@ -22,7 +22,7 @@ func main() {
 }
 
 type provision struct{}
-type playback struct{}
+type playbackAPI struct{}
 
 // c is the FastForward configuration instance.
 var conf *config.Conf
@@ -53,7 +53,7 @@ func provisionCommandFactory() (cli.Command, error) {
 }
 
 // Run takes playback-api command.
-func (p playback) Run(args []string) int {
+func (p playbackAPI) Run(args []string) int {
 	for _, arg := range args {
 		if arg == "start" {
 			if c.DEFAULT["provisioning_driver"] == "playback" {
@@ -67,15 +67,15 @@ func (p playback) Run(args []string) int {
 }
 
 // Help takes the help for playback-api.
-func (p playback) Help() string {
+func (p playbackAPI) Help() string {
 	return "<start> Start the playback-api on 0.0.0.0:7001"
 }
 
 // Synopsis takes the synopsis of playback-api.
-func (p playback) Synopsis() string {
+func (p playbackAPI) Synopsis() string {
 	return "Start the playback-api on 0.0.0.0:7001"
 }
 
-func playbackCommandFactory() (cli.Command, error) {
-	return &playback{}, nil
+func playbackAPICommandFactory() (cli.Command, error) {
+	return &playbackAPI{}, nil
 }
