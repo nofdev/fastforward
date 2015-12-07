@@ -12,6 +12,7 @@ func main() {
 	c.Commands = map[string]cli.CommandFactory{
 		"provision-api": provisionCommandFactory,
 		"playback-api":  playbackAPICommandFactory,
+		"playback": playbackCommandFactory,
 	}
 
 	exitStatus, err := c.Run()
@@ -23,6 +24,7 @@ func main() {
 
 type provision struct{}
 type playbackAPI struct{}
+type playback struct{}
 
 // c is the FastForward configuration instance.
 var conf *config.Conf
@@ -79,3 +81,23 @@ func (p playbackAPI) Synopsis() string {
 func playbackAPICommandFactory() (cli.Command, error) {
 	return &playbackAPI{}, nil
 }
+
+
+func playbackCommandFactory() (cli.Command, error) {
+	return &playback{}, nil
+}
+
+// Run takes ansible-playbook. Ansible has no API client for golang, We need to use the cmd-line.
+func (p playback) Run(args []string) int {
+	command.ExecuteWithOutput("ansible-playbook", args...)
+	return 0
+}
+
+// Help takes the command line help.
+func (p playback) Help() string {
+	return "<playback> <yaml> [--extra-vars] Run the playback yaml"
+}
+
+ func (p playback) Synopsis() string {
+	 return "Run the playback yaml"
+ }
