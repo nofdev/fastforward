@@ -1,3 +1,4 @@
+// Package config holds a FastForward configuration parser.
 package config
 
 import (
@@ -13,7 +14,9 @@ type Configure interface {
 
 // Conf is the configuration data structure.
 type Conf struct {
+	// DEFAULT is a ini configuration file section.
 	DEFAULT  map[string]string
+	// PLAYBACK is a ini configuration file section.
 	PLAYBACK map[string]string
 }
 
@@ -31,6 +34,7 @@ func (c *Conf) LoadConf() *Conf {
 	checkErr(err)
 
 	FFconf := &Conf{
+		// Keys are the configuration file field, Values are the value of field.
 		DEFAULT: map[string]string{"provisioning_driver": DefaultSection.Options()["provisioning_driver"],
 			"orchestration_driver": DefaultSection.Options()["orchestration_driver"],
 			"monitoring_driver":    DefaultSection.Options()["monitoring_driver"]},
