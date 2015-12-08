@@ -6,7 +6,7 @@ import "github.com/wingedpig/loom"
 type Config struct {
 	loom.Config
 }
-
+// TODO: Refactor testing. the host: "TESTSERVER"" is unreachable. Could not used for Travis-CI.
 func TestRun(t *testing.T) {
 	c := &Config{loom.Config{User: "ubuntu", Host: "TESTSERVER",
 		DisplayOutput: true, AbortOnError: true}}
