@@ -1,3 +1,6 @@
+/*
+Package main is the ff command line interface.
+*/
 package main
 
 import "os"
