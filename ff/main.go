@@ -32,6 +32,8 @@ var c = conf.LoadConf()
 
 // Run takes provision-api command.
 func (p provision) Run(args []string) int {
+	// TODO: Refactor arg parse.
+	// TODO: Refactor exit status.
 	for _, arg := range args {
 		if arg == "start" {
 			command.ExecuteWithOutput("provision-api")
@@ -90,6 +92,7 @@ func playbackCommandFactory() (cli.Command, error) {
 // Run takes ansible-playbook. Ansible has no API client for golang, We need to use the cmd-line.
 func (p playback) Run(args []string) int {
 	command.ExecuteWithOutput("ansible-playbook", args...)
+	// TODO: Refactor exit status.
 	return 0
 }
 
