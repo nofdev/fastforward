@@ -1,4 +1,4 @@
-# FastForward [![Build Status](https://travis-ci.org/nofdev/fastforward.svg?branch=master)](https://travis-ci.org/nofdev/fastforward)
+# FastForward [![GoDoc](https://godoc.org/github.com/nofdev/fastforward?status.svg)](https://godoc.org/github.com/nofdev/fastforward) [![Build Status](https://travis-ci.org/nofdev/fastforward.svg?branch=master)](https://travis-ci.org/nofdev/fastforward)
 FastForward is a DevOps automate platform.
 
 ## Basic Provisioning API [![GoDoc](https://godoc.org/github.com/nofdev/fastforward/provisioning?status.svg)](https://godoc.org/github.com/nofdev/fastforward/provisioning)
