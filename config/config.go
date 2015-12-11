@@ -22,7 +22,7 @@ type Conf struct {
 
 // LoadConf loads the FastForward configuration and return the Conf pointer.
 func (c *Conf) LoadConf() *Conf {
-	path := "fastforward.conf"
+	path := "/etc/fastforward.conf"
 	conf, err := configparser.Read(path)
 	if err != nil {
 		log.Fatal(err)
