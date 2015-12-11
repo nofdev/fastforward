@@ -1,3 +1,4 @@
+// Package main is the JSON-RPC 2.0 API server for playback.
 package main
 
 import (
