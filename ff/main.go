@@ -10,7 +10,7 @@ import "github.com/jiasir/playback/command"
 import "github.com/nofdev/fastforward/config"
 
 func main() {
-	c := cli.NewCLI("FastForward", "0.0.1")
+	c := cli.NewCLI("ff", "0.0.3")
 	c.Args = os.Args[1:]
 	c.Commands = map[string]cli.CommandFactory{
 		"provision-api": provisionCommandFactory,
