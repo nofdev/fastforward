@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# USAGE:
+# ./jsonrpctest.py http://localhost:7000/v1 Provisioning.GetFile "{'User': 'ubuntu', 'Host': 'FASTFORWARD', 'RemoteFile': 'testputstring', 'Localfile': 'testputstring'}"
+
 import urllib2
 import json
 import sys
