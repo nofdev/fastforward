@@ -42,10 +42,6 @@ const chrony = `
 # better to use IP numbers than host names.
 
 server {{.Server}} iburst
-server 0.debian.pool.ntp.org offline minpoll 8
-server 1.debian.pool.ntp.org offline minpoll 8
-server 2.debian.pool.ntp.org offline minpoll 8
-server 3.debian.pool.ntp.org offline minpoll 8
 
 
 # Look here for the admin password needed for chronyc.  The initial
