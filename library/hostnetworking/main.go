@@ -35,8 +35,12 @@ func main() {
 	interfaces.PurgeMainConf()
 	// setup internal nic
 	interfaces.SetInternalNIC()
-	// setup external nic
-	interfaces.SetExternalNIC()
+	
+	if interfaces.ExternalNIC != "" {
+		// setup external nic
+		interfaces.SetExternalNIC()
+	}
+	
 	if interfaces.Restart {
 		// restart the system for take effect
 		command.ExecuteWithOutput("shuwdown", "-r", "+1", "FastForward takes reboot")
