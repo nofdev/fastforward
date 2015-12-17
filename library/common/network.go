@@ -1,6 +1,7 @@
 package common
 
 // Interfaces takes /etc/network/interfaces config file
+// Every filed are needed
 type Interfaces struct {
 	InternalNIC     string `json:"InternalNIC"`     // default is eth0
 	InternalIP      string `json:"InternalIP"`      // the internal ip address
