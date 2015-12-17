@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/nofdev/fastforward/library/common"
+	"github.com/jiasir/playback/command"
 )
 
 func main() {
@@ -36,6 +37,10 @@ func main() {
 	interfaces.SetInternalNIC()
 	// setup external nic
 	interfaces.SetExternalNIC()
+	if interfaces.Restart {
+		// restart the system for take effect
+		command.ExecuteWithOutput("shuwdown", "-r", "+1", "FastForward takes reboot")
+	}
 
 	output, err := json.Marshal(*interfaces) //produce JSON from interfaces struct
 	if err != nil {

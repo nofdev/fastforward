@@ -10,8 +10,8 @@ type Interfaces struct {
 	InternalDNS1    string `json:"InternalDNS1"`    // the dns-nameservers
 	InternalDNS2    string `json:"InternalDNS2"`
 	ExternalNIC     string `json:"ExternalNIC"` // default is eth1
+	Restart         bool   `json:"Restart"`     // restart the system
 	Changed         bool   `json:"Changed"`     // changed status
-
 }
 
 // InitInterfaces set the Interfaces struct
