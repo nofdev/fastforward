@@ -15,22 +15,24 @@ type Interfaces struct {
 }
 
 // InitInterfaces set the Interfaces struct
-func (i *Interfaces) InitInterfaces(k, v string) {
+func (i *Interfaces) InitInterfaces(k, v interface{}) {
 	switch k {
 	case "InternalNIC":
-		i.InternalNIC = v
+		i.InternalNIC = v.(string)
 	case "InternalIP":
-		i.InternalIP = v
+		i.InternalIP = v.(string)
 	case "InternalMask":
-		i.InternalMask = v
+		i.InternalMask = v.(string)
 	case "InternalGateway":
-		i.InternalGateway = v
+		i.InternalGateway = v.(string)
 	case "InternalDNS1":
-		i.InternalDNS1 = v
+		i.InternalDNS1 = v.(string)
 	case "InternalDNS2":
-		i.InternalDNS2 = v
+		i.InternalDNS2 = v.(string)
 	case "ExternalNIC":
-		i.ExternalNIC = v
+		i.ExternalNIC = v.(string)
+	case "Restart":
+		i.Restart = v.(bool)
 	}
 }
 
