@@ -34,4 +34,11 @@
   tasks:
     - name: set networking
 	  hostnetworking: InternalNIC=eth0 InternalIP=10.0.0.52 InternalMask=255.255.255.0 InternalGateway=10.0.0.1 InternalDNS1=4.4.4.4 InternalDNS2=8.8.8.8 ExternalNIC=eth1 Restart=true
-	  
+# install ntp server on controller01
+- name: install ntp server
+  hosts: controller01
+  sudo: true
+  tasks:
+    - name: install ntp server
+      ntpserver: Server=s1a.time.edu.cn
+      
