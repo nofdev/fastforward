@@ -16,9 +16,23 @@ To set the networking for controller01
 
 	---
 	- name: set networking
-	hosts: controller01
-	sudo: true
-	tasks:
-		- name: set networking
+	  hosts: controller01
+	  sudo: true
+	  tasks:
+        - name: set networking
 		  hostnetworking: InternalNIC=eth0 InternalIP=x.x.x.x InternalMask=x.x.x.x InternalGateway=x.x.x.x InternalDNS1=x.x.x.x InternalDNS2=x.x.x.x ExternalNIC=eth1 Restart=true
+
+## ntpserver module
+Module Args
+* Server=[ip]: the upstream ntp for your ntp server
+
+Install ntp server on controller01
+
+	---
+	- name: install ntp server
+	  hosts: controller01
+	  sudo: true
+	  tasks:
+	    - name: install ntp server
+	      ntpserver: Server=s1a.time.edu.cn
 
