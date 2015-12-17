@@ -43,7 +43,7 @@ func main() {
 	
 	if interfaces.Restart {
 		// restart the system for take effect
-		command.ExecuteWithOutput("shuwdown", "-r", "+1", "FastForward takes reboot")
+		command.ExecuteWithOutput("sudo", "shuwdown", "-r", "+1", "FastForward takes reboot")
 	}
 
 	output, err := json.Marshal(*interfaces) //produce JSON from interfaces struct
