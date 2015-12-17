@@ -41,4 +41,11 @@
   tasks:
     - name: install ntp server
       ntpserver: Server=s1a.time.edu.cn
-      
+# install ntp client on the other nodes
+# the computes hosts are all of your nodes except controllers
+- name: install ntp client
+  hosts: computes
+  sudo: true
+  tasks:
+    - name: install ntp client
+      ntpserver: Server=10.0.0.11

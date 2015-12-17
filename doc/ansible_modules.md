@@ -36,3 +36,13 @@ Install ntp server on controller01
 	    - name: install ntp server
 	      ntpserver: Server=s1a.time.edu.cn
 
+Install ntp client on the other nodes
+
+	---
+	- name: install ntp client
+	  hosts: computes
+	  sudo: true
+	  tasks:
+	    - name: install ntp client
+		  ntpserver: Server=[CONTROLLER01_IP]
+		  
