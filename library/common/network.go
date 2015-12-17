@@ -23,6 +23,8 @@ func (i *Interfaces) InitInterfaces(k, v string) {
 		i.InternalIP = v
 	case "InternalMask":
 		i.InternalMask = v
+	case "InternalGateway":
+		i.InternalGateway = v
 	case "InternalDNS1":
 		i.InternalDNS1 = v
 	case "InternalDNS2":
