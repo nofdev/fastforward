@@ -45,4 +45,18 @@ Install ntp client on the other nodes
 	  tasks:
 	    - name: install ntp client
 		  ntpserver: Server=[CONTROLLER01_IP]
-		  
+
+## ospackages module
+Module Args
+* Version=[liberty]: the cloud-archive version
+
+Install openstack packages and python clients on all nodes
+
+	---
+	- name: install packages and python clients
+	  hosts: all
+	  sudo: true
+	  tasks:
+	    - name: install packages and python clients
+		  ospackages: Version=liberty
+ 

@@ -49,3 +49,10 @@
   tasks:
     - name: install ntp client
       ntpserver: Server=10.0.0.11
+# install openstack packages and python clients on all nodes
+- name: install openstack packages and python clients on all nodes
+  hosts: all
+  sudo: true
+  tasks:
+    - name: install openstack packages and python clients
+      ospackages: Version=liberty
