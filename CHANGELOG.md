@@ -10,3 +10,8 @@
 
 ### v0.0.3
 * Common: Bug fixes
+
+### v0.0.4
+* Common: hostnetworking ansible module
+* Common: ntpserver ansible module
+* Common: ospackage ansible module
