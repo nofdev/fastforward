@@ -1,0 +1,151 @@
+{
+	"ImportPath": "github.com/nofdev/fastforward",
+	"GoVersion": "go1.5",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/Azure/go-autorest/autorest",
+			"Comment": "v2.1.0-2-gbdba0a8",
+			"Rev": "bdba0a8422e534e5b680cbd3453840a49f7736c6"
+		},
+		{
+			"ImportPath": "github.com/Azure/go-pkcs12",
+			"Rev": "40102598fec19246e36fb595018ce387dbd7b3cc"
+		},
+		{
+			"ImportPath": "github.com/alyu/configparser",
+			"Rev": "26b2fe18bee125de2a3090d6fadb7e280e63eba6"
+		},
+		{
+			"ImportPath": "github.com/azure/azure-sdk-for-go/arm/examples/helpers",
+			"Comment": "v1.2-306-g05d01d0",
+			"Rev": "05d01d05e50f0fba241862806cc3d6ee20ee8585"
+		},
+		{
+			"ImportPath": "github.com/azure/azure-sdk-for-go/arm/storage",
+			"Comment": "v1.2-306-g05d01d0",
+			"Rev": "05d01d05e50f0fba241862806cc3d6ee20ee8585"
+		},
+		{
+			"ImportPath": "github.com/azure/go-autorest/autorest",
+			"Comment": "v2.1.0-2-gbdba0a8",
+			"Rev": "bdba0a8422e534e5b680cbd3453840a49f7736c6"
+		},
+		{
+			"ImportPath": "github.com/ccding/go-config-reader/config",
+			"Rev": "8b6c2b50197f20da3b1c5944c274c173634dc056"
+		},
+		{
+			"ImportPath": "github.com/cpuguy83/go-md2man/md2man",
+			"Comment": "v1.0.4",
+			"Rev": "71acacd42f85e5e82f70a55327789582a5200a90"
+		},
+		{
+			"ImportPath": "github.com/davecgh/go-spew/spew",
+			"Rev": "5215b55f46b2b919f50a1df0eaa5886afe4e3b3d"
+		},
+		{
+			"ImportPath": "github.com/dgrijalva/jwt-go",
+			"Comment": "v2.4.0-4-gafef698",
+			"Rev": "afef698c326bfd906b11659432544e5aae441d44"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "9c068cf16d982f8bd444b8c352acbeec34c4fe5b"
+		},
+		{
+			"ImportPath": "github.com/gorilla/rpc/v2",
+			"Rev": "64e20900b8aa38bb0771dec71ba3bcc2b07fc8ec"
+		},
+		{
+			"ImportPath": "github.com/inconshreveable/mousetrap",
+			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+		},
+		{
+			"ImportPath": "github.com/jiasir/playback/command",
+			"Comment": "v0.1.10-14-g51f495f",
+			"Rev": "51f495fdde553e9894ba805bf5037d3938d8eca4"
+		},
+		{
+			"ImportPath": "github.com/jiasir/playback/config",
+			"Comment": "v0.1.10-14-g51f495f",
+			"Rev": "51f495fdde553e9894ba805bf5037d3938d8eca4"
+		},
+		{
+			"ImportPath": "github.com/jiasir/playback/libs/azure-sdk-for-go/core/http",
+			"Comment": "v0.1.10-14-g51f495f",
+			"Rev": "51f495fdde553e9894ba805bf5037d3938d8eca4"
+		},
+		{
+			"ImportPath": "github.com/jiasir/playback/libs/azure-sdk-for-go/core/tls",
+			"Comment": "v0.1.10-14-g51f495f",
+			"Rev": "51f495fdde553e9894ba805bf5037d3938d8eca4"
+		},
+		{
+			"ImportPath": "github.com/jiasir/playback/libs/azure-sdk-for-go/management",
+			"Comment": "v0.1.10-14-g51f495f",
+			"Rev": "51f495fdde553e9894ba805bf5037d3938d8eca4"
+		},
+		{
+			"ImportPath": "github.com/jiasir/playback/libs/command",
+			"Comment": "v0.1.10-14-g51f495f",
+			"Rev": "51f495fdde553e9894ba805bf5037d3938d8eca4"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/cli",
+			"Rev": "8102d0ed5ea2709ade1243798785888175f6e415"
+		},
+		{
+			"ImportPath": "github.com/pmezard/go-difflib/difflib",
+			"Rev": "d8ed2627bdf02c080bf22230dbb337003b7aba2d"
+		},
+		{
+			"ImportPath": "github.com/russross/blackfriday",
+			"Comment": "v1.4",
+			"Rev": "0b647d0506a698cca42caca173e55559b12a69f2"
+		},
+		{
+			"ImportPath": "github.com/shurcooL/sanitized_anchor_name",
+			"Rev": "10ef21a441db47d8b13ebcc5fd2310f636973c77"
+		},
+		{
+			"ImportPath": "github.com/spf13/cobra",
+			"Rev": "f06ae19d963461c7450894c62a798986cc1dd385"
+		},
+		{
+			"ImportPath": "github.com/spf13/pflag",
+			"Rev": "08b1a584251b5b62f458943640fc8ebd4d50aaa5"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/assert",
+			"Comment": "v1.0-85-ga1f9799",
+			"Rev": "a1f97990ddc16022ec7610326dd9bce31332c116"
+		},
+		{
+			"ImportPath": "github.com/wingedpig/loom",
+			"Rev": "16fa1dc3c32a37af2f86bc0c1e940cc171095497"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/curve25519",
+			"Rev": "f18420efc3b4f8e9f3d51f6bd2476e92c46260e9"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/ssh",
+			"Rev": "f18420efc3b4f8e9f3d51f6bd2476e92c46260e9"
+		},
+		{
+			"ImportPath": "gopkg.in/check.v1",
+			"Rev": "4f90aeace3a26ad7021961c297b22c42160c7b25"
+		},
+		{
+			"ImportPath": "gopkg.in/yaml.v2",
+			"Rev": "f7716cbe52baa25d2e9b0d0da546fcf909fc16b4"
+		}
+	]
+}

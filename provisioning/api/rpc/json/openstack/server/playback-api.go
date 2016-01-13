@@ -5,12 +5,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
-	"github.com/gorilla/rpc/v2"
-	"github.com/gorilla/rpc/v2/json"
+	"github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/gorilla/mux"
+	"github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/gorilla/rpc/v2"
+	"github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/gorilla/rpc/v2/json"
 	"github.com/nofdev/fastforward/provisioning/api/rpc/json/openstack"
 )
-
 
 func main() {
 	s := rpc.NewServer()

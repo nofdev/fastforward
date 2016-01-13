@@ -4,7 +4,7 @@ package config
 import (
 	"log"
 
-	"github.com/alyu/configparser"
+	"github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/alyu/configparser"
 )
 
 // Configure takes the FastForward Configuration.
@@ -15,7 +15,7 @@ type Configure interface {
 // Conf is the configuration data structure.
 type Conf struct {
 	// DEFAULT is a ini configuration file section.
-	DEFAULT  map[string]string
+	DEFAULT map[string]string
 	// PLAYBACK is a ini configuration file section.
 	PLAYBACK map[string]string
 }

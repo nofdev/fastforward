@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/jiasir/playback/command"
 	"github.com/nofdev/fastforward/library/common"
-	"github.com/jiasir/playback/command"
 )
 
 func main() {
@@ -35,12 +35,12 @@ func main() {
 	interfaces.PurgeMainConf()
 	// setup internal nic
 	interfaces.SetInternalNIC()
-	
+
 	if interfaces.ExternalNIC != "" {
 		// setup external nic
 		interfaces.SetExternalNIC()
 	}
-	
+
 	if interfaces.Restart {
 		// restart the system for take effect
 		command.ExecuteWithOutput("sudo", "shuwdown", "-r", "+1", "FastForward takes reboot")

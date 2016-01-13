@@ -5,8 +5,8 @@ package main
 
 import "os"
 import "log"
-import "github.com/mitchellh/cli"
-import "github.com/jiasir/playback/command"
+import "github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/mitchellh/cli"
+import "github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/jiasir/playback/command"
 import "github.com/nofdev/fastforward/config"
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 	c.Commands = map[string]cli.CommandFactory{
 		"provision-api": provisionCommandFactory,
 		"playback-api":  playbackAPICommandFactory,
-		"playback": playbackCommandFactory,
+		"playback":      playbackCommandFactory,
 	}
 
 	exitStatus, err := c.Run()
@@ -87,7 +87,6 @@ func playbackAPICommandFactory() (cli.Command, error) {
 	return &playbackAPI{}, nil
 }
 
-
 func playbackCommandFactory() (cli.Command, error) {
 	return &playback{}, nil
 }
@@ -104,6 +103,6 @@ func (p playback) Help() string {
 	return "<playback> <yaml> [--extra-vars] Run the playback yaml"
 }
 
- func (p playback) Synopsis() string {
-	 return "Run the playback yaml"
- }
+func (p playback) Synopsis() string {
+	return "Run the playback yaml"
+}

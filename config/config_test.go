@@ -4,8 +4,8 @@ import (
 	"log"
 	"testing"
 
-	"github.com/alyu/configparser"
-	"github.com/stretchr/testify/assert"
+	"github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/alyu/configparser"
+	"github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/stretchr/testify/assert"
 )
 
 func TestReadConfig(t *testing.T) {

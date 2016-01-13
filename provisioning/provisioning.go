@@ -1,6 +1,6 @@
 package provisioning
 
-import "github.com/wingedpig/loom"
+import "github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/wingedpig/loom"
 
 // Provisioning contains the provisioning method only.
 type Provisioning interface {
