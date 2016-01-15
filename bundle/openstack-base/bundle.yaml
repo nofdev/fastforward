@@ -196,6 +196,7 @@ services:
     num_units: 1
     options:
       ext-port: eth1
+      instance-mtu: 1400
       openstack-origin: cloud:trusty-liberty
     to:
     - '0'
