@@ -1,0 +1,91 @@
+ceph:
+  fsid: 'changeme-980b-11e4-b6f6-3c970e8b1cf7'
+  monitor-count: 3
+  monitor-secret: 'changemeeJXUExAA+By9u+GPhl8/XiUQ4nwI3A=='
+  osd-devices: '/dev/sdb'
+  osd-reformat: 'yes'
+  source: cloud:trusty-liberty
+ceph-osd:
+  osd-devices: '/dev/sdb'
+  osd-reformat: 'yes'
+  source: cloud:trusty-liberty
+mysql:
+  vip: '192.168.77.3'
+  vip_cidr: 24
+  sst-password: changeme
+  root-password: changeme
+  max-connections: 20000
+mysql-hacluster:
+  corosync_transport: unicast
+keystone:
+  admin-user: 'admin'
+  admin-password: 'openstack'
+  admin-token: 'changemesvfjkLD8fu893jls'
+  vip: '192.168.77.5'
+  vip_cidr: 24
+  openstack-origin: cloud:trusty-liberty
+  ha-mcastport: 5403
+keystone-hacluster:
+  corosync_transport: unicast
+nova-cloud-controller:
+  vip: '192.168.77.6'
+  vip_cidr: 24
+  network-manager: 'Neutron'
+  console-access-protocol: novnc
+  quantum-security-groups: 'yes'
+  openstack-origin: cloud:trusty-liberty
+ncc-hacluster:
+  corosync_transport: unicast
+glance:
+  vip: '192.168.77.7'
+  vip_cidr: 24
+  openstack-origin: cloud:trusty-liberty
+  ha-mcastport: 5402
+glance-hacluster:
+  corosync_transport: unicast
+cinder:
+  block-device: 'None'
+  glance-api-version: 2
+  ha-mcastport: 5401
+  vip: '192.168.77.8'
+  vip_cidr: 24
+  openstack-origin: cloud:trusty-liberty
+cinder-hacluster:
+  corosync_transport: unicast
+neutron-api:
+  neutron-security-groups: true
+  vip: '192.168.77.11'
+  vip_cidr: 24
+  openstack-origin: cloud:trusty-liberty
+neutron-gateway:
+  ext-port: 'eth1'
+  instance-mtu: 1400
+  openstack-origin: cloud:trusty-liberty
+nova-compute:
+  enable-live-migration: true
+  enable-resize: true
+  migration-auth-type: ssh
+  openstack-origin: cloud:trusty-liberty
+  manage-neutron-plugin-legacy-mode: False
+swift-proxy:
+  zone-assignment: 'manual'
+  replicas: 3
+  swift-hash: 'changeme-8b06-11e2-8ac0-531c923c8fae'
+  vip: '192.168.77.9'
+swift-hacluster:
+  corosync_transport: unicast
+swift-storage-z1:
+  zone: 1
+  block-device: 'sdb'
+swift-storage-z2:
+  zone: 2
+  block-device: 'sdb'
+swift-storage-z3:
+  zone: 3
+  block-device: 'sdb'
+openstack-dashboard:
+  vip: '192.168.77.10'
+  vip_cidr: 24
+  openstack-origin: cloud:trusty-liberty
+dashboard-hacluster:
+  corosync_transport: unicast

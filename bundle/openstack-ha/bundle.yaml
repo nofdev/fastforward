@@ -1,0 +1,354 @@
+series: trusty
+services: 
+  mysql: 
+    charm: "cs:trusty/percona-cluster-31"
+    num_units: 3
+    options: 
+      "max-connections": 20000
+      "root-password": changeme
+      "sst-password": changeme
+      vip: 10.32.152.3
+    annotations: 
+      "gui-x": "1122.5"
+      "gui-y": "952.25"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+      - "lxc:2"
+  ceph: 
+    charm: "cs:trusty/ceph-42"
+    num_units: 3
+    options: 
+      fsid: "changeme-980b-11e4-b6f6-3c970e8b1cf7"
+      "monitor-secret": changemeeJXUExAA+By9u+GPhl8/XiUQ4nwI3A==
+      "osd-devices": /dev/sdb
+      "osd-reformat": "yes"
+      source: "cloud:trusty-liberty"
+    annotations: 
+      "gui-x": "1115"
+      "gui-y": "462"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+      - "lxc:2"
+  "ceph-osd": 
+    charm: "cs:trusty/ceph-osd-14"
+    num_units: 3
+    options: 
+      "osd-devices": /dev/sdb
+      "osd-reformat": "yes"
+      source: "cloud:trusty-liberty"
+    annotations: 
+      "gui-x": "1377.5"
+      "gui-y": "463.25"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+      - "lxc:2"
+  "mysql-hacluster": 
+    charm: "cs:trusty/hacluster-26"
+    options: 
+      corosync_transport: unicast
+    annotations: 
+      "gui-x": "1408"
+      "gui-y": "947.25"
+  "rabbitmq-server": 
+    charm: "cs:trusty/rabbitmq-server-42"
+    num_units: 3
+    annotations: 
+      "gui-x": "1683.5"
+      "gui-y": "462.75"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+      - "lxc:2"
+  keystone: 
+    charm: "cs:trusty/keystone-32"
+    num_units: 3
+    options: 
+      "admin-password": openstack
+      "admin-token": changemesvfjkLD8fu893jls
+      "ha-mcastport": 5403
+      "openstack-origin": "cloud:trusty-liberty"
+      vip: 10.32.152.5
+    annotations: 
+      "gui-x": "1123.5"
+      "gui-y": "715.25"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+      - "lxc:2"
+  "keystone-hacluster": 
+    charm: "cs:trusty/hacluster-26"
+    options: 
+      corosync_transport: unicast
+    annotations: 
+      "gui-x": "1386"
+      "gui-y": "707.75"
+  "nova-cloud-controller": 
+    charm: "cs:trusty/nova-cloud-controller-65"
+    num_units: 3
+    options: 
+      "console-access-protocol": novnc
+      "network-manager": Neutron
+      "openstack-origin": "cloud:trusty-liberty"
+      "quantum-security-groups": "yes"
+      vip: 10.32.152.6
+    annotations: 
+      "gui-x": "1695.5"
+      "gui-y": "707.5"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+      - "lxc:2"
+  "ncc-hacluster": 
+    charm: "cs:trusty/hacluster-26"
+    options: 
+      corosync_transport: unicast
+    annotations: 
+      "gui-x": "1695.5"
+      "gui-y": "948.75"
+  glance: 
+    charm: "cs:trusty/glance-29"
+    num_units: 3
+    options: 
+      "ha-mcastport": 5402
+      "openstack-origin": "cloud:trusty-liberty"
+      vip: 10.32.152.7
+    annotations: 
+      "gui-x": "1110.5001220703125"
+      "gui-y": "1187.5714111328125"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+      - "lxc:2"
+  "glance-hacluster": 
+    charm: "cs:trusty/hacluster-26"
+    options: 
+      corosync_transport: unicast
+    annotations: 
+      "gui-x": "1389.78564453125"
+      "gui-y": "1171.1429443359375"
+  cinder: 
+    charm: "cs:trusty/cinder-33"
+    num_units: 3
+    options: 
+      "block-device": None
+      "glance-api-version": 2
+      "ha-mcastport": 5401
+      "openstack-origin": "cloud:trusty-liberty"
+      vip: 10.32.152.8
+    annotations: 
+      "gui-x": "1993.35693359375"
+      "gui-y": "714.7141723632812"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+      - "lxc:2"
+  "cinder-hacluster": 
+    charm: "cs:trusty/hacluster-26"
+    options: 
+      corosync_transport: unicast
+    annotations: 
+      "gui-x": "2019.785888671875"
+      "gui-y": "944.0000610351562"
+  "neutron-gateway": 
+    charm: "cs:trusty/quantum-gateway-18"
+    num_units: 2
+    options: 
+      "ext-port": eth1
+      "instance-mtu": 1400
+      "openstack-origin": "cloud:trusty-liberty"
+    annotations: 
+      "gui-x": "1984.785888671875"
+      "gui-y": "477.10711669921875"
+    to: 
+      - "lxc:0"
+      - "lxc:1"
+  "nova-compute": 
+    charm: "cs:trusty/nova-compute-35"
+    num_units: 7
+    options: 
+      "enable-live-migration": true
+      "enable-resize": true
+      "manage-neutron-plugin-legacy-mode": false
+      "migration-auth-type": ssh
+      "openstack-origin": "cloud:trusty-liberty"
+    annotations: 
+      "gui-x": "1703.357177734375"
+      "gui-y": "1167.1072387695312"
+    to: 
+      - "lxc:3"
+      - "lxc:4"
+      - "lxc:5"
+      - "lxc:6"
+      - "lxc:7"
+      - "lxc:8"
+      - "lxc:9"
+  "swift-proxy": 
+    charm: "cs:trusty/swift-proxy-26"
+    num_units: 3
+    options: 
+      "swift-hash": "changeme-8b06-11e2-8ac0-531c923c8fae"
+      vip: 10.32.152.9
+    annotations: 
+      "gui-x": "1117.64306640625"
+      "gui-y": "1434.2500610351562"
+    to: 
+      - "lxc:4"
+      - "lxc:5"
+  "swift-hacluster": 
+    charm: "cs:trusty/hacluster-26"
+    options: 
+      corosync_transport: unicast
+    annotations: 
+      "gui-x": "1381.21435546875"
+      "gui-y": "1429.2500610351562"
+  "swift-storage-z1": 
+    charm: "cs:trusty/swift-storage-24"
+    num_units: 1
+    annotations: 
+      "gui-x": "2020.5"
+      "gui-y": "1158.0715942382812"
+    to: 
+      - "lxc:3"
+  "swift-storage-z2": 
+    charm: "cs:trusty/swift-storage-24"
+    num_units: 1
+    options: 
+      zone: 2
+    annotations: 
+      "gui-x": "1692.6429443359375"
+      "gui-y": "1424.5000610351562"
+    to: 
+      - "lxc:4"
+  "swift-storage-z3": 
+    charm: "cs:trusty/swift-storage-24"
+    num_units: 1
+    options: 
+      zone: 3
+    annotations: 
+      "gui-x": "1994.785400390625"
+      "gui-y": "1418.0717163085937"
+    to: 
+      - "lxc:5"
+  "openstack-dashboard": 
+    charm: "cs:trusty/openstack-dashboard-20"
+    num_units: 3
+    options: 
+      "openstack-origin": "cloud:trusty-liberty"
+      vip: 10.32.152.10
+    annotations: 
+      "gui-x": "1104.071044921875"
+      "gui-y": "1658.7860717773437"
+    to: 
+      - "lxc:0"
+      - "lxc:2"
+      - "lxc:1"
+  "dashboard-hacluster": 
+    charm: "cs:trusty/hacluster-26"
+    annotations: 
+      "gui-x": "1387.642578125"
+      "gui-y": "1663.7860717773437"
+relations: 
+  - - "ceph:osd"
+    - "ceph-osd:mon"
+  - - "mysql:ha"
+    - "mysql-hacluster:ha"
+  - - "keystone:ha"
+    - "keystone-hacluster:ha"
+  - - "keystone:shared-db"
+    - "mysql:shared-db"
+  - - "nova-cloud-controller:ha"
+    - "ncc-hacluster:ha"
+  - - "nova-cloud-controller:shared-db"
+    - "mysql:shared-db"
+  - - "nova-cloud-controller:identity-service"
+    - "keystone:identity-service"
+  - - "nova-cloud-controller:amqp"
+    - "rabbitmq-server:amqp"
+  - - "glance:ha"
+    - "glance-hacluster:ha"
+  - - "glance:shared-db"
+    - "mysql:shared-db"
+  - - "glance:image-service"
+    - "nova-cloud-controller:image-service"
+  - - "glance:ceph"
+    - "ceph:client"
+  - - "glance:identity-service"
+    - "keystone:identity-service"
+  - - "cinder:ha"
+    - "cinder-hacluster:ha"
+  - - "cinder:shared-db"
+    - "mysql:shared-db"
+  - - "cinder:identity-service"
+    - "keystone:identity-service"
+  - - "cinder:cinder-volume-service"
+    - "nova-cloud-controller:cinder-volume-service"
+  - - "cinder:amqp"
+    - "rabbitmq-server:amqp"
+  - - "cinder:ceph"
+    - "ceph:client"
+  - - "cinder:image-service"
+    - "glance:image-service"
+  - - "neutron-gateway:shared-db"
+    - "mysql:shared-db"
+  - - "neutron-gateway:amqp"
+    - "rabbitmq-server:amqp"
+  - - "neutron-gateway:amqp-nova"
+    - "rabbitmq-server:amqp"
+  - - "neutron-gateway:quantum-network-service"
+    - "nova-cloud-controller:quantum-network-service"
+  - - "nova-compute:cloud-compute"
+    - "nova-cloud-controller:cloud-compute"
+  - - "nova-compute:amqp"
+    - "rabbitmq-server:amqp"
+  - - "nova-compute:image-service"
+    - "glance:image-service"
+  - - "nova-compute:ceph"
+    - "ceph:client"
+  - - "swift-proxy:ha"
+    - "swift-hacluster:ha"
+  - - "swift-proxy:identity-service"
+    - "keystone:identity-service"
+  - - "swift-proxy:swift-storage"
+    - "swift-storage-z1:swift-storage"
+  - - "swift-proxy:swift-storage"
+    - "swift-storage-z2:swift-storage"
+  - - "swift-proxy:swift-storage"
+    - "swift-storage-z3:swift-storage"
+  - - "openstack-dashboard:ha"
+    - "dashboard-hacluster:ha"
+  - - "openstack-dashboard:identity-service"
+    - "keystone:identity-service"
+machines: 
+  "0": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "1": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "2": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "3": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "4": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "5": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "6": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "7": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "8": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
+  "9": 
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=6 mem=32768"
