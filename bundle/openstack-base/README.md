@@ -17,7 +17,7 @@ Servers should have two physical network ports cabled; the first is used for gen
 
 ## Deployment
 
-    juju quickstart bundle:openstack-base
+    juju-quickstart -e maas -n bundle:openstack-base --debug --no-browser
 
 ## Components
 
