@@ -3,12 +3,12 @@
 # maas version 1.9.0
 
 # ceph mon and osd
-juju deploy --config ha_config.yaml ceph --to lxc:1
-juju add-unit ceph --to lxc:2
-juju add-unit ceph --to lxc:3
-juju deploy --config ha_config.yaml ceph-osd --to lxc:1
-juju add-unit ceph-osd --to lxc:2
-juju add-unit ceph-osd --to lxc:3
+juju deploy --config ha_config.yaml ceph --to 1
+juju add-unit ceph --to 2
+juju add-unit ceph --to 3
+juju deploy --config ha_config.yaml ceph-osd --to 1
+juju add-unit ceph-osd --to 2
+juju add-unit ceph-osd --to 3
 juju add-relation ceph ceph-osd
 
 # mysql
@@ -66,34 +66,34 @@ juju add-relation cinder ceph
 juju add-relation cinder glance
 
 # neutron
-juju deploy --config ha_config.yaml quantum-gateway neutron-gateway --to lxc:1
-juju add-unit neutron-gateway --to lxc:2
+juju deploy --config ha_config.yaml neutron-gateway --to 1
+juju add-unit neutron-gateway --to 2
 juju add-relation neutron-gateway mysql
 juju add-relation neutron-gateway:amqp rabbitmq-server:amqp
 juju add-relation neutron-gateway:amqp-nova rabbitmq-server:amqp
 juju add-relation neutron-gateway nova-cloud-controller
 
 # nova
-juju deploy --config ha_config.yaml nova-compute --to lxc:4
-juju add-unit nova-compute --to lxc:5
-juju add-unit nova-compute --to lxc:6
-juju add-unit nova-compute --to lxc:7
-juju add-unit nova-compute --to lxc:8
-juju add-unit nova-compute --to lxc:9
-juju add-unit nova-compute --to lxc:10
+juju deploy --config ha_config.yaml nova-compute --to 4
+juju add-unit nova-compute --to 5
+juju add-unit nova-compute --to 6
+juju add-unit nova-compute --to 7
+juju add-unit nova-compute --to 8
+juju add-unit nova-compute --to 9
+juju add-unit nova-compute --to 10
 juju add-relation nova-compute nova-cloud-controller
 juju add-relation nova-compute rabbitmq-server
 juju add-relation nova-compute glance
 juju add-relation nova-compute ceph
 
 # swift
-juju deploy --config ha_config.yaml swift-proxy --to lxc:4
-juju add-unit swift-proxy --to lxc:5
-juju add-unit swift-proxy --to lxc:6
+juju deploy --config ha_config.yaml swift-proxy --to 4
+juju add-unit swift-proxy --to 5
+juju add-unit swift-proxy --to 6
 juju deploy --config ha_config.yaml hacluster swift-hacluster
-juju deploy --config ha_config.yaml swift-storage swift-storage-z1 --to lxc:4
-juju deploy --config ha_config.yaml swift-storage swift-storage-z2 --to lxc:5
-juju deploy --config ha_config.yaml swift-storage swift-storage-z3 --to lxc:6
+juju deploy --config ha_config.yaml swift-storage swift-storage-z1 --to 4
+juju deploy --config ha_config.yaml swift-storage swift-storage-z2 --to 5
+juju deploy --config ha_config.yaml swift-storage swift-storage-z3 --to 6
 juju add-relation swift-proxy swift-hacluster
 juju add-relation swift-proxy keystone
 juju add-relation swift-proxy swift-storage-z1
