@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# juju version 1.25.2
+# maas version 1.9.0
 
 # ceph mon and osd
 juju deploy --config ha_config.yaml ceph --to lxc:1
