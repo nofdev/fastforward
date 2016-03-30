@@ -4,7 +4,7 @@ FastForward is a DevOps automate platform.
 ## About provision OpenStack(FastForward Playback)
 Playback is a core components of FastForward that is an OpenStack provisioning DevOps tool and all of the OpenStack components can be deployed automation with high availability on Ubuntu based operating system.
 
-[the docs for FastForward Playback](doc/fastforward_playback)
+[the docs for FastForward Playback](doc/fastforward_playback.md)
 
 ## Basic Provisioning API [![GoDoc](https://godoc.org/github.com/nofdev/fastforward/provisioning?status.svg)](https://godoc.org/github.com/nofdev/fastforward/provisioning)
 
