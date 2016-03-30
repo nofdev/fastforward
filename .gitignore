@@ -32,3 +32,6 @@ _testmain.go
 /env/pip-selfcheck.json
 *.pyproj
 fastforward.sln
+dist/
+fastforward.egg-info/
+*.pyc
