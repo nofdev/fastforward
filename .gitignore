@@ -25,3 +25,10 @@ _testmain.go
 *.test
 *.prof
 /.vs/fastforward/v14/.suo
+/env/.ptvs
+/env/Include
+/env/Lib
+/env/Scripts
+/env/pip-selfcheck.json
+*.pyproj
+fastforward.sln
