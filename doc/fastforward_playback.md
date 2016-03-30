@@ -378,5 +378,5 @@ connection = 'mysql+pymysql://keystone:changeme@CONTROLLER_VIP/keystone'
 memcache_servers = 'CONTROLLER1:11211,CONTROLLER2:11211'
 
 keystone = Keystone(user='ubuntu', hosts='controller1,controller2')
-ececute(keystone._install_keystone, admin_token, connection, memcache_servers)
+execute(keystone._install_keystone, admin_token, connection, memcache_servers)
 ```
