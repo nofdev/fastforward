@@ -1,5 +1,5 @@
 # FastForward [![GoDoc](https://godoc.org/github.com/nofdev/fastforward?status.svg)](https://godoc.org/github.com/nofdev/fastforward) [![Build Status](https://travis-ci.org/nofdev/fastforward.svg?branch=master)](https://travis-ci.org/nofdev/fastforward)
-FastForward is a ultimate DevOps platform.
+FastForward is an ultimate DevOps platform.
 
 ## About provision OpenStack(FastForward Playback)
 Playback is a core components of FastForward that is an OpenStack provisioning DevOps tool and all of the OpenStack components can be deployed automation with high availability on Ubuntu based operating system.
