@@ -26,7 +26,7 @@ setup(name='fastforward',
     author_email='taio@outlook.com',
     url='https://github.com/nofdev/fastforward',
     license='GPLv2',
-    install_requires=['playback >= 0.2.2'],
+    install_requires=['playback == 0.2.3'],
     packages=find_packages(),
     entry_points={ 
        'console_scripts': [
