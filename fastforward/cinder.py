@@ -40,6 +40,7 @@ def install(user, hosts, key_filename, password, connection, rabbit_hosts, rabbi
             memcached_servers, 
             populate)
 
+@priority(21)
 def make(parser):
     """provison cinder-api and cinder-volume"""
     s = parser.add_subparsers(
