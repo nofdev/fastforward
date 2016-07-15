@@ -1,3 +1,4 @@
+import sys
 from fastforward.cliutil import priority
 from playback.api import Nova
 
