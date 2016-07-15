@@ -47,7 +47,7 @@ setup(name='fastforward',
             'horizon = fastforward.horizon:make',
             'cinder = fastforward.cinder:make',
             'swift = fastforward.swift:make',
-            #'swift-storage = fastforward.swift_storage:make',#23
+            'swift-storage = fastforward.swift_storage:make',
             #'manila = fastforward.manila:make',#24
             #'manila-share = fastforward.manila_share:make'#25
         ],
