@@ -25,27 +25,16 @@ setup(name='fastforward',
     author=__author__,
     author_email='jiasir@icloud.com',
     url='https://github.com/nofdev/fastforward',
-    license='GPLv2',
+    license='MIT',
     install_requires=['playback == 0.3.4'],
     packages=find_packages(),
     entry_points={ 
        'console_scripts': [
-           'env-deploy = playback.env:main',
-           'mysql-deploy = playback.mysql:main',
-           'haproxy-deploy = playback.haproxy:main',
-           'rabbitmq-deploy = playback.rabbitmq:main',
-           'keystone-deploy = playback.keystone:main',
-           'glance-deploy = playback.glance:main',
-           'nova-deploy = playback.nova:main',
-           'nova-compute-deploy = playback.nova_compute:main',
-           'neutron-deploy = playback.neutron:main',
-           'neutron-agent-deploy = playback.neutron_agent:main',
-           'horizon-deploy = playback.horizon:main',
-           'cinder-deploy = playback.cinder:main',
-           'swift-deploy = playback.swift:main',
-           'swift-storage-deploy = playback.swift_storage:main',
-           'manila-deploy = playback.manila:main',
-           'manila-share-deploy = playback.manila_share:main'
+           'ff = fastforward.cli:main',
            ],
+
+        'openstack': [
+            'environment = fastforward.environment:make'
+        ],
        },
     )

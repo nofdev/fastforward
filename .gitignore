@@ -37,3 +37,4 @@ fastforward.egg-info/
 *.pyc
 .vscode/
 venv/
+build/
