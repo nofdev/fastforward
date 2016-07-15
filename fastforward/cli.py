@@ -19,7 +19,7 @@ def get_parser():
     )
     parser.add_argument(
         '--hosts',
-        help='the remote host to connect to ', action='store', default='ubuntu', dest='hosts'
+        help='the remote host to connect to ', action='store', default=None, dest='hosts'
     )
     parser.add_argument(
         '-i', '--key-filename',
