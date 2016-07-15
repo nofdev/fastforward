@@ -37,19 +37,19 @@ setup(name='fastforward',
             'environment = fastforward.environment:make',
             'mysql = fastforward.mysql:make',
             'haproxy = fastforward.haproxy:make',
-            #'rabbitmq-deploy = fastforward.rabbitmq:make',
-            #'keystone-deploy = fastforward.keystone:make',
-            #'glance-deploy = fastforward.glance:make',
-            #'nova-deploy = fastforward.nova:make',
-            #'nova-compute-deploy = fastforward.nova_compute:make',
-            #'neutron-deploy = fastforward.neutron:make',
-            #'neutron-agent-deploy = fastforward.neutron_agent:make',
-            #'horizon-deploy = fastforward.horizon:make',
+            'rabbitmq = fastforward.rabbitmq:make',
+            #'keystone = fastforward.keystone:make',#14
+            #'glance = fastforward.glance:make',#15
+            #'nova = fastforward.nova:make',#16
+            #'nova-compute = fastforward.nova_compute:make',#17
+            #'neutron = fastforward.neutron:make',#18
+            #'neutron-agent = fastforward.neutron_agent:make',#19
+            #'horizon = fastforward.horizon:make',#20
             'cinder = fastforward.cinder:make',
-            #'swift-deploy = fastforward.swift:make',
-            #'swift-storage-deploy = fastforward.swift_storage:make',
-            #'manila-deploy = fastforward.manila:make',
-            #'manila-share-deploy = fastforward.manila_share:make'
+            #'swift = fastforward.swift:make',#22
+            #'swift-storage = fastforward.swift_storage:make',#23
+            #'manila = fastforward.manila:make',#24
+            #'manila-share = fastforward.manila_share:make'#25
         ],
        },
     )
