@@ -34,7 +34,22 @@ setup(name='fastforward',
            ],
 
         'openstack': [
-            'environment = fastforward.environment:make'
+            'environment = fastforward.environment:make',
+            #'mysql-deploy = fastforward.mysql:make',
+            #'haproxy-deploy = fastforward.haproxy:make',
+            #'rabbitmq-deploy = fastforward.rabbitmq:make',
+            #'keystone-deploy = fastforward.keystone:make',
+            #'glance-deploy = fastforward.glance:make',
+            #'nova-deploy = fastforward.nova:make',
+            #'nova-compute-deploy = fastforward.nova_compute:make',
+            #'neutron-deploy = fastforward.neutron:make',
+            #'neutron-agent-deploy = fastforward.neutron_agent:make',
+            #'horizon-deploy = fastforward.horizon:make',
+            'cinder = fastforward.cinder:make',
+            #'swift-deploy = fastforward.swift:make',
+            #'swift-storage-deploy = fastforward.swift_storage:make',
+            #'manila-deploy = fastforward.manila:make',
+            #'manila-share-deploy = fastforward.manila_share:make'
         ],
        },
     )
