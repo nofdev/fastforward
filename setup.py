@@ -35,7 +35,7 @@ setup(name='fastforward',
 
         'openstack': [
             'environment = fastforward.environment:make',
-            #'mysql-deploy = fastforward.mysql:make',
+            'mysql = fastforward.mysql:make',
             #'haproxy-deploy = fastforward.haproxy:make',
             #'rabbitmq-deploy = fastforward.rabbitmq:make',
             #'keystone-deploy = fastforward.keystone:make',
