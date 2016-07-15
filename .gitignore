@@ -35,3 +35,5 @@ fastforward.sln
 dist/
 fastforward.egg-info/
 *.pyc
+.vscode/
+venv/
