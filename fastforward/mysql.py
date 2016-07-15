@@ -2,6 +2,7 @@ import sys
 from playback.api import MysqlConfig
 from playback.api import MysqlManage
 from playback.api import MysqlInstallation
+from fastforward.cliutil import priority
 
 def install(args):
     try:
@@ -73,6 +74,7 @@ def manage_subparser(s):
                                 action='store', default=None, dest='root_db_pass')
     return manage_parser
 
+@priority(11)
 def make(parser):
     """provision MariaDB Galera Cluster"""
     s = parser.add_subparsers(
