@@ -42,7 +42,7 @@ def install(user, hosts, key_filename, password, connection, rabbit_hosts, rabbi
 
 @priority(21)
 def make(parser):
-    """provison cinder-api and cinder-volume"""
+    """provison cinder and volume service with HA"""
     s = parser.add_subparsers(
         title='commands',
         metavar='COMMAND',
