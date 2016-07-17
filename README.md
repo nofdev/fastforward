@@ -2,7 +2,7 @@
 FastForward is an ultimate DevOps platform.
 
 
-## Quickstart
+## Quick-start provision OpenStack(mitaka) on xenil or trusty
 
 ### Requirements
 
