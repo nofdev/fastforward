@@ -26,7 +26,7 @@
 <p>FastForward is an ultimate DevOps platform.</p>
 
 <h2>
-<a id="quickstart" class="anchor" href="#quickstart" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quickstart</h2>
+<a id="quick-start-provision-openstackmitaka-on-xenil-or-trusty" class="anchor" href="#quick-start-provision-openstackmitaka-on-xenil-or-trusty" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick-start provision OpenStack(mitaka) on xenil or trusty</h2>
 
 <h3>
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h3>
@@ -117,7 +117,7 @@ ff --user ubuntu --hosts CONTROLLER1 openstack mysql manage --change-root-passwo
 
 <p>Generate the HAProxy configuration and upload to target hosts(Do not forget to edit the generated configuration)</p>
 
-<pre><code>ff openstack haproxy gen-conf
+<pre><code>ff openstack haproxygen-conf
 ff --user ubuntu --hosts HAPROXY1,HAPROXY2 openstack haproxy config --upload-conf haproxy.cfg
 </code></pre>
 
