@@ -26,7 +26,7 @@ setup(name='fastforward',
     author_email='jiasir@icloud.com',
     url='https://github.com/nofdev/fastforward',
     license='MIT',
-    install_requires=['playback == 0.3.5'],
+    install_requires=['playback == 0.3.6'],
     packages=find_packages(),
     entry_points={ 
        'console_scripts': [
