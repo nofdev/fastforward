@@ -44,7 +44,9 @@ func checkFile(r *http.Request, args *Args, result *Result) {
 //  Optional Args: {'AptCache': true, 'UseSudo': true, 'Password': 'PASS', 'KeyFiles': 'IDRSA', 'DisplayOutput': true, 'AbortOnError': true}
 func (p *Provisioning) Exec(r *http.Request, args *Args, result *Result) error {
 	cmd := provisioning.Cmd{AptCache: args.AptCache, UseSudo: args.UseSudo, CmdLine: args.CmdLine}
-	i := provisioning.Provisioning(args)
+	// Convert args to an interface
+	// i := provisioning.Provisioning(args)
+	var i provisioning.Provisioning = args
 	*result, _ = i.Execute(cmd)
 	log.Printf("Request: %s, Method: Exec, Args: %s, Result: %s", *r, *args, *result)
 	return nil
