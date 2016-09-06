@@ -6,7 +6,7 @@ package main
 import "os"
 import "log"
 import "github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/mitchellh/cli"
-import "github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/jiasir/playback/command"
+import "github.com/nofdev/fastforward/provisioning/command"
 import "github.com/nofdev/fastforward/config"
 
 func main() {
