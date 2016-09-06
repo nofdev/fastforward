@@ -1,6 +1,6 @@
 package provisioning
 
-import "github.com/nofdev/fastforward/Godeps/_workspace/src/github.com/jiasir/playback/command"
+import "github.com/nofdev/fastforward/provisioning/command"
 
 // OpenStack interface takes methods for provision OpenStack.
 type OpenStack interface {
